@@ -1046,8 +1046,16 @@
           "type": "FIELD",
           "name": "exception",
           "content": {
-            "type": "SYMBOL",
-            "name": "_expr"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expr"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         },
         {
@@ -2055,8 +2063,16 @@
           "type": "FIELD",
           "name": "exception",
           "content": {
-            "type": "SYMBOL",
-            "name": "_expr"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expr"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         }
       ]

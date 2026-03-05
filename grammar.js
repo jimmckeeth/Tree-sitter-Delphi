@@ -232,7 +232,7 @@ function statements(trailing) {
 
 		[rn('raise'),       $ => seq(
 			$.kRaise,
-			field('exception', $._expr),
+			field('exception', optional($._expr)),
 			...semicolon
 		)],
 
