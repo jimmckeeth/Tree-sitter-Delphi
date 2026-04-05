@@ -199,3 +199,64 @@ end;
      (kDot)
      (identifier)))
    (kEnd))))
+
+===
+For-in with Inline Variable
+===
+procedure Test;
+begin
+  for var Item in List do
+    DoSomething(Item);
+end;
+---
+(root
+ (defProc
+  (declProc
+   (kProcedure)
+   (identifier))
+  (block
+   (kBegin)
+   (foreach
+    (kFor)
+    (varAssignDef
+     (kVar)
+     (identifier))
+    (kIn)
+    (identifier)
+    (kDo)
+    (statement
+     (exprCall
+      (identifier)
+      (exprArgs
+       (identifier)))))
+   (kEnd))))
+
+===
+Inline Variable with Type Inference
+===
+procedure Test;
+begin
+  var I := 10;
+  var S := 'Hello';
+end;
+---
+(root
+ (defProc
+  (declProc
+   (kProcedure)
+   (identifier))
+  (block
+   (kBegin)
+   (assignment
+    (varAssignDef
+     (kVar)
+     (identifier))
+    (kAssign)
+    (literalNumber))
+   (assignment
+    (varAssignDef
+     (kVar)
+     (identifier))
+    (kAssign)
+    (literalString))
+   (kEnd))))

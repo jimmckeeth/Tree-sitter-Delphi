@@ -5005,6 +5005,10 @@
           {
             "type": "literalStringMultiline",
             "named": true
+          },
+          {
+            "type": "varAssignDef",
+            "named": true
           }
         ]
       }
