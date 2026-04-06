@@ -124,19 +124,21 @@ function exportRules() {
         totals.fail += catStats[catName].fail;
     });
 
-    // 6. Generate Markdown
+    // 6. Generate Markdown for rules.md
     let output = '# Tree-sitter Delphi Rules List\n\n';
     
-    output += '## <a id="summary"></a>Summary\n\n';
-    output += '| Category | Rules | Tested | Untested | Total Tests | Passing | Failing |\n';
-    output += '| :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n';
+    let summaryTable = '## <a id="summary"></a>Summary\n\n';
+    summaryTable += '| Category | Rules | Tested | Untested | Total Tests | Passing | Failing |\n';
+    summaryTable += '| :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n';
     
     Object.keys(catStats).sort().forEach(cat => {
         const s = catStats[cat];
-        output += `| [${cat}](#${getSlug(cat)}) | ${s.rules} | ${s.tested} | ${s.untested} | ${s.totalTests} | ${s.pass} | ${s.fail} |\n`;
+        summaryTable += `| [${cat}](#${getSlug(cat)}) | ${s.rules} | ${s.tested} | ${s.untested} | ${s.totalTests} | ${s.pass} | ${s.fail} |\n`;
     });
     
-    output += `| **TOTAL** | **${totals.rules}** | **${totals.tested}** | **${totals.untested}** | **${totals.totalTests}** | **${totals.pass}** | **${totals.fail}** |\n`;
+    summaryTable += `| **TOTAL** | **${totals.rules}** | **${totals.tested}** | **${totals.untested}** | **${totals.totalTests}** | **${totals.pass}** | **${totals.fail}** |\n`;
+    
+    output += summaryTable;
     output += '\n---\n\n';
 
     Object.keys(categories).sort().forEach(cat => {
@@ -155,6 +157,29 @@ function exportRules() {
 
     fs.writeFileSync(outputPath, output);
     console.log(`Successfully exported rules to ${outputPath}`);
+
+    // 7. Update README.md
+    const readmePath = path.join(__dirname, '..', 'README.md');
+    if (fs.existsSync(readmePath)) {
+        let readmeContent = fs.readFileSync(readmePath, 'utf8');
+        // Replace links in summaryTable for README (point to docs/rules.md)
+        let readmeSummary = summaryTable.replace(/\]\(#/g, '](docs/rules.md#');
+        
+        const startMarker = '<!-- TEST_SUMMARY_START -->';
+        const endMarker = '<!-- TEST_SUMMARY_END -->';
+        const startIndex = readmeContent.indexOf(startMarker);
+        const endIndex = readmeContent.indexOf(endMarker);
+        
+        if (startIndex !== -1 && endIndex !== -1) {
+            readmeContent = readmeContent.substring(0, startIndex + startMarker.length) 
+                + '\n\n' + readmeSummary + '\n' 
+                + readmeContent.substring(endIndex);
+            fs.writeFileSync(readmePath, readmeContent);
+            console.log(`Successfully updated summary in README.md`);
+        } else {
+            console.log(`Markers not found in README.md`);
+        }
+    }
 }
 
 exportRules();

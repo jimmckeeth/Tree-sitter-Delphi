@@ -1,0 +1,64 @@
+name: CI and Release
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  test-and-update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build parser
+      run: npm run build
+
+    - name: Run tests
+      run: npm test
+
+    - name: Update documentation
+      run: node docs/export_rules.js
+
+    - name: Commit documentation changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "docs: auto-update rules.md and README.md with latest test results"
+        file_pattern: "docs/rules.md README.md"
+
+  release:
+    needs: test-and-update
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create Tag
+      id: tag_version
+      run: |
+        SHA_SHORT=$(git rev-parse --short HEAD)
+        TAG="v0.10.2-${SHA_SHORT}"
+        echo "tag=${TAG}" >> $GITHUB_OUTPUT
+        git tag $TAG
+        git push origin $TAG
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.tag_version.outputs.tag }}
+        name: Release ${{ steps.tag_version.outputs.tag }}
+        generate_release_notes: true
