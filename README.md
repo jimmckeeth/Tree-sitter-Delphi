@@ -26,15 +26,15 @@ Grammar for Delphi's Object Pascal and divergent dialects like Freepascal. Focus
 
 | Category                                                             |  Rules  | Tested  | Untested | Total Tests | Passing | Failing |
 | :------------------------------------------------------------------- | :-----: | :-----: | :------: | :---------: | :-----: | :-----: |
-| [Declarations & Definitions](docs/rules.md#declarations-definitions) |   51    |   42    |    9     |     260     |   259   |    0    |
-| [Expressions](docs/rules.md#expressions)                             |   13    |   11    |    2     |     237     |   236   |    0    |
-| [High-Level Structure](docs/rules.md#high-level-structure)           |    9    |    9    |    0     |     251     |   250   |    0    |
+| [Declarations & Definitions](docs/rules.md#declarations-definitions) |   51    |   42    |    9     |     657     |   656   |    0    |
+| [Expressions](docs/rules.md#expressions)                             |   13    |   11    |    2     |     643     |   642   |    0    |
+| [High-Level Structure](docs/rules.md#high-level-structure)           |    9    |    9    |    0     |     648     |   647   |    0    |
 | [Internal Helpers](docs/rules.md#internal-helpers)                   |   26    |    0    |    26    |      0      |    0    |    0    |
-| [Keywords & Terminals](docs/rules.md#keywords-terminals)             |   163   |   112   |    51    |     260     |   259   |    0    |
+| [Keywords & Terminals](docs/rules.md#keywords-terminals)             |   163   |   112   |    51    |     666     |   665   |    0    |
 | [Literals](docs/rules.md#literals)                                   |    7    |    6    |    1     |     213     |   212   |    0    |
-| [Other](docs/rules.md#other)                                         |   12    |    5    |    7     |     259     |   258   |    0    |
-| [Statements](docs/rules.md#statements)                               |   24    |   23    |    1     |     661     |   249   |   412   |
-| **TOTAL**                                                            | **305** | **208** |  **97**  |   **672**   | **259** | **412** |
+| [Other](docs/rules.md#other)                                         |   12    |    5    |    7     |     665     |   664   |    0    |
+| [Statements](docs/rules.md#statements)                               |   24    |   23    |    1     |     655     |   655   |    0    |
+| **TOTAL**                                                            | **305** | **208** |  **97**  |   **666**   | **665** |  **0**  |
 
 <!-- TEST_SUMMARY_END -->
 

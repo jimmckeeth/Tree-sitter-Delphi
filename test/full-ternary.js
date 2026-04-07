@@ -19,20 +19,52 @@ end.
 `;
 }
 
-function genTernary(depth) {
-    if (depth <= 0) return ['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)];
-    
-    const cond = [`(A < B)`, `(C > D)`, `True`, `False`][Math.floor(Math.random() * 4)];
-    const val1 = genTernary(depth - 1);
-    const val2 = genTernary(depth - 1);
+/**
+ * The Oracle: Generates both Code and its Expected Tree-sitter S-expression
+ */
+function genTernaryWithOracle(depth) {
+    if (depth <= 0) {
+        const id = ['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)];
+        return {
+            code: id,
+            expected: `(identifier)`
+        };
+    }
     
     const choice = Math.floor(Math.random() * 3);
-    if (choice === 0) return `if ${cond} then ${val1} else ${val2}`;
-    if (choice === 1) return `(if ${cond} then ${val1} else ${val2})`;
-    return `${val1} + ${val2}`; // Mix in some math to test precedence
+    
+    if (choice === 0) { // exprIf
+        const cond = [`(A < B)`, `(C > D)`, `True`, `False`][Math.floor(Math.random() * 4)];
+        // Simplified mapping for the oracle's expectation of standard conditions
+        const condExpected = cond.includes('<') ? `(exprBinary (identifier) (kLt) (identifier))` :
+                             cond.includes('>') ? `(exprBinary (identifier) (kGt) (identifier))` :
+                             cond === 'True' ? `(kTrue)` : `(kFalse)`;
+        
+        const v1 = genTernaryWithOracle(depth - 1);
+        const v2 = genTernaryWithOracle(depth - 1);
+        
+        return {
+            code: `if ${cond} then ${v1.code} else ${v2.code}`,
+            expected: `(exprIf (kIf) ${condExpected} (kThen) ${v1.expected} (kElse) ${v2.expected})`
+        };
+    } else if (choice === 1) { // exprParens
+        const inner = genTernaryWithOracle(depth - 1);
+        return {
+            code: `(${inner.code})`,
+            expected: `(exprParens ${inner.expected})`
+        };
+    } else { // exprBinary (+)
+        const left = genTernaryWithOracle(depth - 1);
+        const right = genTernaryWithOracle(depth - 1);
+        // Ternary has lowest precedence, so A + (if B then C else D) should be (exprBinary ... (exprIf))
+        return {
+            code: `${left.code} + ${right.code}`,
+            expected: `(exprBinary ${left.expected} (kAdd) ${right.expected})`
+        };
+    }
 }
 
-const uniqueCompilingCode = new Set();
+const uniqueResults = new Map(); // code -> expectedAST
 let totalGenerated = 0;
 
 console.log("1. Validating toolchain...");
@@ -46,18 +78,18 @@ try {
     process.exit(1);
 }
 
-console.log("2. Fuzzing Ternary Expressions...");
+console.log("2. Fuzzing Ternary Expressions with Oracle...");
 for (let i = 0; i < 500; i++) {
     totalGenerated++;
-    const expr = genTernary(Math.floor(Math.random() * 5) + 1);
-    const code = `Result := ${expr};`;
+    const oracle = genTernaryWithOracle(Math.floor(Math.random() * 4) + 1);
+    const fullCode = `Result := ${oracle.code};`;
     
-    if (uniqueCompilingCode.has(code)) continue;
+    if (uniqueResults.has(fullCode)) continue;
 
-    fs.writeFileSync(tempFile, createDelphiProgram(code));
+    fs.writeFileSync(tempFile, createDelphiProgram(fullCode));
     try {
         execSync(`${dcc32} -B -CC -W- -H- ${tempFile}`, { stdio: 'ignore' });
-        uniqueCompilingCode.add(code);
+        uniqueResults.set(fullCode, oracle.expected);
         process.stdout.write('+');
     } catch (e) {
         process.stdout.write('.');
@@ -65,32 +97,45 @@ for (let i = 0; i < 500; i++) {
 }
 
 console.log(`\n\nGenerated: ${totalGenerated}`);
-console.log(`Compiling (Unique): ${uniqueCompilingCode.size}`);
+console.log(`Compiling (Unique): ${uniqueResults.size}`);
 
-// 3. Prepare corpus
+// 3. Write corpus with Oracle's expectations
 let corpusContent = "";
 let testId = 1;
-uniqueCompilingCode.forEach(code => {
-    corpusContent += `===\nFuzzed Ternary ${testId++}\n===\nprocedure Test;\nbegin\n  ${code}\nend;\n---\n\n`;
+uniqueResults.forEach((expected, code) => {
+    // Wrap the expected AST in the root/defProc/block structure tree-sitter expects
+    const fullExpected = `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) ${expected}) (kEnd))))`;
+    corpusContent += `===\nFuzzed Ternary ${testId++}\n===\nprocedure Test;\nbegin\n  ${code}\nend;\n---\n${fullExpected}\n\n`;
 });
 fs.writeFileSync(corpusFile, corpusContent);
 
-console.log(`\n3. Running Tree-sitter tests...`);
+console.log(`\n3. Running Tree-sitter Comparison...`);
 let passCount = 0;
 let failCount = 0;
 
-uniqueCompilingCode.forEach((code, index) => {
-    const testName = `Fuzzed Ternary ${index + 1}`;
-    // We use 'tree-sitter parse' to check for (ERROR) nodes
+// Note: Instead of running full 'npm test', we parse manually to compare against Oracle
+uniqueResults.forEach((expectedAST, code) => {
     const testCode = `procedure Test; begin ${code} end;`;
     fs.writeFileSync('temp_parse.pas', testCode);
     
     try {
-        const output = execSync(`npx tree-sitter parse temp_parse.pas`, { encoding: 'utf8' });
-        if (output.includes('ERROR') || output.includes('MISSING')) {
-            failCount++;
-        } else {
+        const output = execSync(`npx tree-sitter parse temp_parse.pas`, { encoding: 'utf8' }).trim();
+        
+        // Clean up Tree-sitter output (remove line ranges [0,0] etc)
+        const actualAST = output.replace(/\s*\[\d+,\s*\d+\]\s*-\s*\[\d+,\s*\d+\]/g, '')
+                                .replace(/\s+/g, ' ')
+                                .replace(/\(root /g, '(root')
+                                .trim();
+        
+        // Construct the expected full AST for comparison
+        const fullExpected = `(root (defProc header: (declProc (kProcedure) (identifier)) body: (block (kBegin) (assignment (identifier) (kAssign) ${expectedAST}) (kEnd))))`
+                                .replace(/\s+/g, ' ')
+                                .trim();
+
+        if (actualAST === fullExpected && !actualAST.includes('ERROR') && !actualAST.includes('MISSING')) {
             passCount++;
+        } else {
+            failCount++;
         }
     } catch (e) {
         failCount++;
@@ -100,14 +145,20 @@ uniqueCompilingCode.forEach((code, index) => {
 console.log("\nDIABOLICAL REPORT");
 console.log("=================");
 console.log(`Generated:         ${totalGenerated}`);
-console.log(`Compiled (Valid):  ${uniqueCompilingCode.size}`);
-console.log(`Passed Parser:     ${passCount}`);
-console.log(`Failed Parser:     ${failCount}`);
+console.log(`Compiled (Valid):  ${uniqueResults.size}`);
+console.log(`Matched Oracle:    ${passCount}`);
+console.log(`Mismatched Oracle: ${failCount}`);
+
+const yieldRate = (uniqueResults.size / totalGenerated) * 100;
+const failRate = (failCount / uniqueResults.size) * 100;
+
+console.log(`\nYield Rate:        ${yieldRate.toFixed(1)}% (Target: >20%)`);
+console.log(`Grammar Fail Rate: ${failRate.toFixed(1)}% (Target: >20%)`);
 
 if (failCount > 0) {
-    console.log("\n[RESULT] SUCCESS: Found " + failCount + " cases where valid Delphi code failed the parser!");
+    console.log("\n[RESULT] SUCCESS: Exposed " + failCount + " cases where the parser and oracle disagreed!");
 } else {
-    console.log("\n[RESULT] FAILURE: Parser passed everything. Fuzzer was not diabolical enough.");
+    console.log("\n[RESULT] FAILURE: Parser matches Oracle perfectly. Increase Diabolical Factor.");
 }
 
 // Cleanup
