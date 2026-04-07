@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -153,6 +157,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -258,6 +266,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -453,6 +465,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -709,6 +725,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -873,6 +893,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -1028,6 +1052,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -1287,6 +1315,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -1937,6 +1969,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -2012,6 +2048,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -2107,6 +2147,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -2182,6 +2226,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -2280,6 +2328,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -2525,6 +2577,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -3063,6 +3119,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -3359,6 +3419,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -3443,6 +3507,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -3548,6 +3616,10 @@
             "named": true
           },
           {
+            "type": "kIsNot",
+            "named": true
+          },
+          {
             "type": "kLt",
             "named": true
           },
@@ -3565,6 +3637,10 @@
           },
           {
             "type": "kNeq",
+            "named": true
+          },
+          {
+            "type": "kNotIn",
             "named": true
           },
           {
@@ -3607,6 +3683,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -3691,6 +3771,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -4023,6 +4107,276 @@
     }
   },
   {
+    "type": "exprIf",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "exprBinary",
+            "named": true
+          },
+          {
+            "type": "exprBrackets",
+            "named": true
+          },
+          {
+            "type": "exprCall",
+            "named": true
+          },
+          {
+            "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
+            "named": true
+          },
+          {
+            "type": "exprParens",
+            "named": true
+          },
+          {
+            "type": "exprSubscript",
+            "named": true
+          },
+          {
+            "type": "exprTpl",
+            "named": true
+          },
+          {
+            "type": "exprUnary",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inherited",
+            "named": true
+          },
+          {
+            "type": "kFalse",
+            "named": true
+          },
+          {
+            "type": "kNil",
+            "named": true
+          },
+          {
+            "type": "kSpecialize",
+            "named": true
+          },
+          {
+            "type": "kTrue",
+            "named": true
+          },
+          {
+            "type": "lambda",
+            "named": true
+          },
+          {
+            "type": "literalNumber",
+            "named": true
+          },
+          {
+            "type": "literalString",
+            "named": true
+          },
+          {
+            "type": "literalStringMultiline",
+            "named": true
+          }
+        ]
+      },
+      "else": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "exprBinary",
+            "named": true
+          },
+          {
+            "type": "exprBrackets",
+            "named": true
+          },
+          {
+            "type": "exprCall",
+            "named": true
+          },
+          {
+            "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
+            "named": true
+          },
+          {
+            "type": "exprParens",
+            "named": true
+          },
+          {
+            "type": "exprSubscript",
+            "named": true
+          },
+          {
+            "type": "exprTpl",
+            "named": true
+          },
+          {
+            "type": "exprUnary",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inherited",
+            "named": true
+          },
+          {
+            "type": "kFalse",
+            "named": true
+          },
+          {
+            "type": "kNil",
+            "named": true
+          },
+          {
+            "type": "kSpecialize",
+            "named": true
+          },
+          {
+            "type": "kTrue",
+            "named": true
+          },
+          {
+            "type": "lambda",
+            "named": true
+          },
+          {
+            "type": "literalNumber",
+            "named": true
+          },
+          {
+            "type": "literalString",
+            "named": true
+          },
+          {
+            "type": "literalStringMultiline",
+            "named": true
+          }
+        ]
+      },
+      "then": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "exprBinary",
+            "named": true
+          },
+          {
+            "type": "exprBrackets",
+            "named": true
+          },
+          {
+            "type": "exprCall",
+            "named": true
+          },
+          {
+            "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
+            "named": true
+          },
+          {
+            "type": "exprParens",
+            "named": true
+          },
+          {
+            "type": "exprSubscript",
+            "named": true
+          },
+          {
+            "type": "exprTpl",
+            "named": true
+          },
+          {
+            "type": "exprUnary",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inherited",
+            "named": true
+          },
+          {
+            "type": "kFalse",
+            "named": true
+          },
+          {
+            "type": "kNil",
+            "named": true
+          },
+          {
+            "type": "kSpecialize",
+            "named": true
+          },
+          {
+            "type": "kTrue",
+            "named": true
+          },
+          {
+            "type": "lambda",
+            "named": true
+          },
+          {
+            "type": "literalNumber",
+            "named": true
+          },
+          {
+            "type": "literalString",
+            "named": true
+          },
+          {
+            "type": "literalStringMultiline",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kElse",
+          "named": true
+        },
+        {
+          "type": "kIf",
+          "named": true
+        },
+        {
+          "type": "kThen",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "exprParens",
     "named": true,
     "fields": {},
@@ -4044,6 +4398,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -4228,6 +4586,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -4401,6 +4763,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -4679,6 +5045,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -4873,6 +5243,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -4948,6 +5322,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -5322,6 +5700,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -5495,6 +5877,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -6123,6 +6509,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -6423,6 +6813,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -6503,6 +6897,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -6769,6 +7167,10 @@
           "named": true
         },
         {
+          "type": "exprIf",
+          "named": true
+        },
+        {
           "type": "exprParens",
           "named": true
         },
@@ -6927,6 +7329,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -7018,6 +7424,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -7133,6 +7543,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -7228,6 +7642,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -7469,6 +7887,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -7764,6 +8186,10 @@
         },
         {
           "type": "exprDot",
+          "named": true
+        },
+        {
+          "type": "exprIf",
           "named": true
         },
         {
@@ -8224,6 +8650,10 @@
             "named": true
           },
           {
+            "type": "exprIf",
+            "named": true
+          },
+          {
             "type": "exprParens",
             "named": true
           },
@@ -8397,6 +8827,10 @@
           },
           {
             "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
             "named": true
           },
           {
@@ -8806,6 +9240,10 @@
     "named": true
   },
   {
+    "type": "kIsNot",
+    "named": true
+  },
+  {
     "type": "kLabel",
     "named": true
   },
@@ -8879,6 +9317,10 @@
   },
   {
     "type": "kNot",
+    "named": true
+  },
+  {
+    "type": "kNotIn",
     "named": true
   },
   {

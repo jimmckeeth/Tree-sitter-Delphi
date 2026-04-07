@@ -157,6 +157,7 @@ function exportRules() {
 
     fs.writeFileSync(outputPath, output);
     console.log(`Successfully exported rules to ${outputPath}`);
+    formatMarkdown(outputPath);
 
     // 7. Update README.md
     const readmePath = path.join(__dirname, '..', 'README.md');
@@ -176,9 +177,21 @@ function exportRules() {
                 + readmeContent.substring(endIndex);
             fs.writeFileSync(readmePath, readmeContent);
             console.log(`Successfully updated summary in README.md`);
+            formatMarkdown(readmePath);
         } else {
             console.log(`Markers not found in README.md`);
         }
+    }
+}
+
+function formatMarkdown(filePath) {
+    try {
+        console.log(`Formatting ${filePath}...`);
+        // Use npx to ensure we use local versions if available, falling back to global/download
+        execSync(`npx prettier --write "${filePath}"`, { stdio: 'inherit' });
+        execSync(`npx markdownlint-cli2 --fix --config .markdownlint.jsonc "${filePath}"`, { stdio: 'inherit' });
+    } catch (e) {
+        console.warn(`Warning: Could not format ${filePath}. Ensure prettier and markdownlint-cli2 are installed.`);
     }
 }
 

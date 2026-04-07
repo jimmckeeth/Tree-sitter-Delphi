@@ -2649,6 +2649,10 @@
         {
           "type": "SYMBOL",
           "name": "exprUnary"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "exprIf"
         }
       ]
     },
@@ -2750,6 +2754,55 @@
           "name": "lambda"
         }
       ]
+    },
+    "exprIf": {
+      "type": "PREC_DYNAMIC",
+      "value": 1,
+      "content": {
+        "type": "PREC_RIGHT",
+        "value": -1,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kIf"
+            },
+            {
+              "type": "FIELD",
+              "name": "condition",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expr"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kThen"
+            },
+            {
+              "type": "FIELD",
+              "name": "then",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expr"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kElse"
+            },
+            {
+              "type": "FIELD",
+              "name": "else",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expr"
+              }
+            }
+          ]
+        }
+      }
     },
     "lambda": {
       "type": "SEQ",
@@ -3482,7 +3535,73 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
+                  "name": "kNotIn"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "rhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expr"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "lhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expr"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "SYMBOL",
                   "name": "kIs"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "rhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expr"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "lhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expr"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "kIsNot"
                 }
               },
               {
@@ -7703,16 +7822,29 @@
           }
         },
         {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "FIELD",
-          "name": "type",
-          "content": {
-            "type": "SYMBOL",
-            "name": "type"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "type",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "type"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -9286,6 +9418,10 @@
       "value": "is",
       "flags": "i"
     },
+    "kIsNot": {
+      "type": "PATTERN",
+      "value": "[iI][sS]\\s+[nN][oO][tT]"
+    },
     "kAs": {
       "type": "PATTERN",
       "value": "as",
@@ -9295,6 +9431,10 @@
       "type": "PATTERN",
       "value": "in",
       "flags": "i"
+    },
+    "kNotIn": {
+      "type": "PATTERN",
+      "value": "[nN][oO][tT]\\s+[iI][nN]"
     },
     "kFor": {
       "type": "PATTERN",
@@ -9839,6 +9979,18 @@
     ],
     [
       "literalString"
+    ],
+    [
+      "_statement",
+      "exprIf"
+    ],
+    [
+      "_statementTr",
+      "exprIf"
+    ],
+    [
+      "exprBinary",
+      "exprUnary"
     ]
   ],
   "precedences": [],

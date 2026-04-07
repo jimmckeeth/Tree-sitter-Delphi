@@ -288,6 +288,9 @@ module.exports = grammar({
 		),
 		[$.exprBinary, $._initializer],
 		[$.literalString],
+		[$._statement, $.exprIf],
+		[$._statementTr, $.exprIf],
+		[$.exprBinary, $.exprUnary],
 	],
 
 	rules: {
@@ -382,7 +385,7 @@ module.exports = grammar({
 		// EXPRESSIONS ---------------------------------------------------------
 
 		_expr:           $ => choice(
-			$._ref, $.exprBinary, $.exprUnary
+			$._ref, $.exprBinary, $.exprUnary, $.exprIf
 		),
 
 		_ref:            $ => choice(
@@ -400,6 +403,10 @@ module.exports = grammar({
 			...enable_if(templates, $.exprTpl),
 			...enable_if(lambda, $.lambda)
 		),
+
+		exprIf:          $ => prec.dynamic(1, prec.right(-1, seq(
+			$.kIf, field('condition', $._expr), $.kThen, field('then', $._expr), $.kElse, field('else', $._expr)
+		))),
 
 		lambda:          $ => seq(
 			choice($.kProcedure, $.kFunction),
@@ -436,7 +443,9 @@ module.exports = grammar({
 			op.infix(1, $._expr, $.kLte, $._expr),
 			op.infix(1, $._expr, $.kGte, $._expr),
 			op.infix(1, $._expr, $.kIn,  $._expr),
+			op.infix(1, $._expr, $.kNotIn, $._expr),
 			op.infix(1, $._expr, $.kIs,  $._expr),
+			op.infix(1, $._expr, $.kIsNot, $._expr),
 
 			op.infix(2, $._expr, $.kAdd, $._expr),
 			op.infix(2, $._expr, $.kSub, $._expr),
@@ -815,8 +824,7 @@ module.exports = grammar({
 			field('name', $._operatorName),
 			field('args', optional($.declArgs)),
 			...enable_if(fpc, field('resultName', optional($.identifier))),
-			':',
-			field('type', $.type),
+			optional(seq(':', field('type', $.type))),
 			field('assign', optional($.defaultValue)),
 			';',
 			repeat($._procAttributeNoExt)
@@ -1022,8 +1030,10 @@ module.exports = grammar({
 		kShr:              $ => /shr/i,
 		kNot:              $ => /not/i,
 		kIs:               $ => /is/i,
+		kIsNot:            $ => /[iI][sS]\s+[nN][oO][tT]/,
 		kAs:               $ => /as/i,
 		kIn:               $ => /in/i,
+		kNotIn:            $ => /[nN][oO][tT]\s+[iI][nN]/,
 
 		kFor:              $ => /for/i,
 		kTo:               $ => /to/i,

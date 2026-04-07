@@ -260,3 +260,106 @@ end;
     (kAssign)
     (literalString))
    (kEnd))))
+
+===
+Ternary If Expression
+===
+procedure Test;
+begin
+  Result := if A > B then A else B;
+end;
+---
+(root
+ (defProc
+  (declProc
+   (kProcedure)
+   (identifier))
+  (block
+   (kBegin)
+   (assignment
+    (identifier)
+    (kAssign)
+    (exprIf
+     (kIf)
+     (exprBinary
+      (identifier)
+      (kGt)
+      (identifier))
+     (kThen)
+     (identifier)
+     (kElse)
+     (identifier)))
+   (kEnd))))
+
+===
+Logical Operators (is not, not in)
+===
+procedure Test;
+begin
+  if A is not B then;
+  if X not in Y then;
+end;
+---
+(root
+ (defProc
+  (declProc
+   (kProcedure)
+   (identifier))
+  (block
+   (kBegin)
+   (if
+    (kIf)
+    (exprBinary
+     (identifier)
+     (kIsNot)
+     (identifier))
+    (kThen))
+   (if
+    (kIf)
+    (exprBinary
+     (identifier)
+     (kNotIn)
+     (identifier))
+    (kThen))
+   (kEnd))))
+
+===
+Custom Managed Records
+===
+type
+  TMyRecord = record
+    class operator Initialize(out Dest: TMyRecord);
+    class operator Finalize(var Dest: TMyRecord);
+  end;
+---
+(root
+ (declTypes
+  (kType)
+  (declType
+   (identifier)
+   (kEq)
+   (declClass
+    (kRecord)
+    (declProc
+     (kClass)
+     (kOperator)
+     (identifier)
+     (declArgs
+      (declArg
+       (kOut)
+       (identifier)
+       (type
+        (typeref
+         (identifier))))))
+    (declProc
+     (kClass)
+     (kOperator)
+     (identifier)
+     (declArgs
+      (declArg
+       (kVar)
+       (identifier)
+       (type
+        (typeref
+         (identifier))))))
+    (kEnd)))))
