@@ -2,9 +2,9 @@
 
 *Breaking tree-sitter's grammar with a diabolically fuzzy oracle.* In developing something as complicated as a grammar, failing test cases are useful.
 
-## Overview[<img src="diabolically-fuzzy.webp" alt="diabolically-fuzzy" style="zoom:50%; float:right" />](diabolically-fuzzy.avif)
+## Overview[<img src="diabolically-fuzzy.avif" alt="diabolically fuzzy" style="zoom:50%; float:right" />](diabolically-fuzzy.avif)
 
-Traditional human-written tests are often limited by the developer's or tester's own understanding of the grammar. This leads to *"happy path"* testing where the tests validate the implementation's assumptions rather than the language's true boundaries. AI/LLM are not much better in this regard. They tend to prefer making tests that pass. 
+Traditional human-written tests are often limited by the developer's or tester's own understanding of the grammar. This leads to *"happy path"* testing where the tests validate the implementation's assumptions rather than the language's true boundaries. AI/LLM are not much better in this regard. They tend to prefer making tests that *pass*. 
 
 The **Diabolical Testing Process** decouples test generation from the implementation by using the actual Delphi compiler as the source of truth and a **Structural Oracle** to predict the correct AST.
 

@@ -1,10 +1,14 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
-const path = require('path');
+const {
+    findDcc32, ensureTmpDir, validateToolchain,
+    parseExistingCorpus, appendToCorpus, compareWithOracle,
+    printReport, cleanup
+} = require('./fuzz-shared-code');
 
-const dcc32 = `"C:\\Program Files (x86)\\Embarcadero\\Studio\\37.0\\bin\\dcc32.EXE"`;
 const tempFile = 'tmp/fuzz_multiline_temp.pas';
 const corpusFile = 'test/corpus/diabolical-multiline.txt';
+const TEST_PREFIX = 'Fuzzed Multiline';
 
 function createDelphiProgram(body) {
     return `
@@ -20,7 +24,7 @@ end.
 }
 
 /**
- * The Oracle: Generates both Code and its Expected Tree-sitter S-expression
+ * The Oracle for multi-line string literals (triple-quoted).
  */
 function genMultilineWithOracle() {
     const contents = [
@@ -32,19 +36,14 @@ function genMultilineWithOracle() {
         "Contains keywords: if then else begin end",
         "   Indented content",
         "\n\n\nMultiple newlines\n\n\n",
-        "'''" // This should fail if just put in, but we want to see if we can escape it or if it's invalid
     ];
-    
+
     const content = contents[Math.floor(Math.random() * contents.length)];
-    
-    // We avoid generating three single quotes in a row inside the content as that ends the literal
-    const sanitizedContent = content.replace(/'''/g, "'' '"); 
-    
-    const code = `'''${sanitizedContent}'''`;
-    const expected = sanitizedContent === "" 
-        ? `(literalStringMultiline)` 
+    const code = `'''${content}'''`;
+    const expected = content === ""
+        ? `(literalStringMultiline)`
         : `(literalStringMultiline (stringContent))`;
-        
+
     return { code, expected };
 }
 
@@ -56,11 +55,20 @@ function genComplexExpr(depth) {
             return { code: "'normal string'", expected: "(literalString)" };
         }
     }
-    
+
     const choice = Math.floor(Math.random() * 3);
     if (choice === 0) { // Concatenation
-        const left = genComplexExpr(depth - 1);
-        const right = genComplexExpr(depth - 1);
+        let left = genComplexExpr(depth - 1);
+        let right = genComplexExpr(depth - 1);
+
+        // Same precedence/associativity wrapping as fuzz-ternary.js
+        if (left.expected.startsWith('(exprIf ')) {
+            left = { code: `(${left.code})`, expected: `(exprParens ${left.expected})` };
+        }
+        if (right.expected.startsWith('(exprBinary ') || right.expected.startsWith('(exprIf ')) {
+            right = { code: `(${right.code})`, expected: `(exprParens ${right.expected})` };
+        }
+
         return {
             code: `${left.code} + ${right.code}`,
             expected: `(exprBinary ${left.expected} (kAdd) ${right.expected})`
@@ -77,32 +85,37 @@ function genComplexExpr(depth) {
     }
 }
 
-const uniqueResults = new Map();
-let totalGenerated = 0;
-
-console.log("1. Validating toolchain...");
-const knownGood = createDelphiProgram("S := '''Initial test''';");
-fs.writeFileSync(tempFile, knownGood);
-try {
-    execSync(`${dcc32} -B -CC -W- -H- ${tempFile}`, { stdio: 'ignore' });
-    console.log("   [PASS] Toolchain is valid.");
-} catch (e) {
-    console.error("   [FAIL] Toolchain validation failed!");
-    process.exit(1);
+function wrapExpected(innerExpected) {
+    return `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) ${innerExpected}) (kEnd))))`;
 }
+
+// --- Main ---
+
+ensureTmpDir();
+const dcc32 = findDcc32();
+validateToolchain(dcc32, tempFile, createDelphiProgram("S := '''Initial test''';"));
+
+const { existingCode, maxTestId } = parseExistingCorpus(corpusFile);
+
+const newResults = new Map();
+let totalGenerated = 0;
+let skippedExisting = 0;
 
 console.log("2. Fuzzing Multi-line Strings with Oracle...");
 for (let i = 0; i < 300; i++) {
     totalGenerated++;
     const oracle = genComplexExpr(Math.floor(Math.random() * 3));
     const fullCode = `S := ${oracle.code};`;
-    
-    if (uniqueResults.has(fullCode)) continue;
+
+    if (newResults.has(fullCode)) continue;
+
+    const codeBlock = `procedure Test;\nbegin\n  ${fullCode}\nend;`;
+    if (existingCode.has(codeBlock)) { skippedExisting++; continue; }
 
     fs.writeFileSync(tempFile, createDelphiProgram(fullCode));
     try {
         execSync(`${dcc32} -B -CC -W- -H- ${tempFile}`, { stdio: 'ignore' });
-        uniqueResults.set(fullCode, oracle.expected);
+        newResults.set(fullCode, oracle.expected);
         process.stdout.write('+');
     } catch (e) {
         process.stdout.write('.');
@@ -110,73 +123,29 @@ for (let i = 0; i < 300; i++) {
 }
 
 console.log(`\n\nGenerated: ${totalGenerated}`);
-console.log(`Compiling (Unique): ${uniqueResults.size}`);
+console.log(`Already in corpus: ${skippedExisting}`);
+console.log(`New unique compiled: ${newResults.size}`);
 
-// 3. Write corpus
-let corpusContent = "";
-let testId = 1;
-uniqueResults.forEach((expected, code) => {
-    const fullExpected = `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) ${expected}) (kEnd))))`;
-    corpusContent += `===\nFuzzed Multiline ${testId++}\n===\nprocedure Test;\nbegin\n  ${code}\nend;\n---\n${fullExpected}\n\n`;
+const newTests = [];
+let testId = maxTestId;
+newResults.forEach((expected, code) => {
+    testId++;
+    newTests.push({
+        name: `${TEST_PREFIX} ${testId}`,
+        code: `procedure Test;\nbegin\n  ${code}\nend;`,
+        expected: wrapExpected(expected)
+    });
 });
-fs.writeFileSync(corpusFile, corpusContent);
+appendToCorpus(corpusFile, newTests);
+console.log(`Appended ${newTests.length} new tests to ${corpusFile}`);
 
-console.log(`\n3. Running Tree-sitter Comparison...`);
-let passCount = 0;
-let failCount = 0;
+console.log("\n3. Running Tree-sitter Comparison...");
+const { passCount, failCount, firstMismatch } = compareWithOracle(newResults, wrapExpected);
 
-uniqueResults.forEach((expectedAST, code) => {
-    const testCode = `procedure Test; begin ${code} end;`;
-    fs.writeFileSync('temp_parse.pas', testCode);
-    
-    try {
-        const output = execSync(`npx tree-sitter parse temp_parse.pas`, { encoding: 'utf8' }).trim();
-        const actualAST = output.replace(/\s*\[\d+,\s*\d+\]\s*-\s*\[\d+,\s*\d+\]/g, '')
-                                .replace(/\w+:\s+/g, '') // Strip field labels like "name: "
-                                .replace(/\s+/g, ' ')
-                                .replace(/\(root\(/g, '(root (') // Standardize root start
-                                .trim();
-        
-        const fullExpected = `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) ${expectedAST}) (kEnd))))`
-                                .replace(/\s+/g, ' ')
-                                .trim();
-
-        if (actualAST === fullExpected && !actualAST.includes('ERROR') && !actualAST.includes('MISSING')) {
-            passCount++;
-        } else {
-            if (failCount === 0) {
-                console.log("\nFIRST MISMATCH DEBUG:");
-                console.log("CODE:     ", testCode);
-                console.log("EXPECTED: ", fullExpected);
-                console.log("ACTUAL:   ", actualAST);
-            }
-            failCount++;
-        }
-    } catch (e) {
-        failCount++;
-    }
+printReport('Multi-line Strings', {
+    totalGenerated, skippedExisting,
+    compiled: newResults.size,
+    passCount, failCount, firstMismatch
 });
 
-console.log("\nDIABOLICAL REPORT");
-console.log("=================");
-console.log(`Generated:         ${totalGenerated}`);
-console.log(`Compiled (Valid):  ${uniqueResults.size}`);
-console.log(`Matched Oracle:    ${passCount}`);
-console.log(`Mismatched Oracle: ${failCount}`);
-
-const yieldRate = (uniqueResults.size / totalGenerated) * 100;
-const failRate = (failCount / uniqueResults.size) * 100;
-
-console.log(`\nYield Rate:        ${yieldRate.toFixed(1)}% (Target: >20%)`);
-console.log(`Grammar Fail Rate: ${failRate.toFixed(1)}% (Target: >20%)`);
-
-if (failCount > 0) {
-    console.log("\n[RESULT] SUCCESS: Exposed " + failCount + " cases where the parser and oracle disagreed!");
-} else {
-    console.log("\n[RESULT] FAILURE: Parser matches Oracle perfectly. Increase Diabolical Factor.");
-}
-
-// Cleanup
-if (fs.existsSync('temp_parse.pas')) fs.unlinkSync('temp_parse.pas');
-if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-if (fs.existsSync('fuzz_multiline_temp.exe')) fs.unlinkSync('fuzz_multiline_temp.exe');
+cleanup(tempFile);

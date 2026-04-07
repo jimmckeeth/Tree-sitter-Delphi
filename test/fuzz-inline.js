@@ -1,10 +1,14 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
-const path = require('path');
+const {
+    findDcc32, ensureTmpDir, validateToolchain,
+    parseExistingCorpus, appendToCorpus, compareWithOracle,
+    printReport, cleanup
+} = require('./fuzz-shared-code');
 
-const dcc32 = `"C:\\Program Files (x86)\\Embarcadero\\Studio\\37.0\\bin\\dcc32.EXE"`;
 const tempFile = 'tmp/fuzz_inline_temp.pas';
 const corpusFile = 'test/corpus/diabolical-inline.txt';
+const TEST_PREFIX = 'Fuzzed Inline';
 
 function createDelphiProgram(body) {
     return `
@@ -18,59 +22,89 @@ end.
 `;
 }
 
+/**
+ * The Oracle for inline variable/constant declarations.
+ *
+ * Grammar produces:
+ *   var X: Type := val  →  (assignment (varAssignDef (kVar) (identifier) (typeref (identifier))) (kAssign) (literalNumber))
+ *   var X := val        →  (assignment (varAssignDef (kVar) (identifier)) (kAssign) (literalNumber))
+ *   const C = val       →  (inlineConst (kConst) (identifier) (defaultValue (kEq) (literalNumber)))
+ *   for var I := ...    →  (for (kFor) (assignment (varAssignDef ...)) (kTo) ... (kDo) body)
+ */
 function genInlineWithOracle(depth) {
     if (depth <= 0) {
         return { code: "G := 1;", expected: "(assignment (identifier) (kAssign) (literalNumber))" };
     }
-    
-    const choice = Math.floor(Math.random() * 3);
+
+    const choice = Math.floor(Math.random() * 5);
+
     if (choice === 0) { // Inline var with type
-        const id = `V${Math.floor(Math.random()*1000)}`;
+        const id = `V${Math.floor(Math.random() * 1000)}`;
         return {
             code: `var ${id}: Integer := 10;`,
             expected: `(assignment (varAssignDef (kVar) (identifier) (typeref (identifier))) (kAssign) (literalNumber))`
         };
-    } else if (choice === 1) { // Inline var inference
-        const id = `V${Math.floor(Math.random()*1000)}`;
+    } else if (choice === 1) { // Inline var with inference
+        const id = `V${Math.floor(Math.random() * 1000)}`;
         return {
             code: `var ${id} := 20;`,
             expected: `(assignment (varAssignDef (kVar) (identifier)) (kAssign) (literalNumber))`
         };
-    } else { // for var in
+    } else if (choice === 2) { // Inline const
+        const id = `C${Math.floor(Math.random() * 1000)}`;
+        const val = Math.floor(Math.random() * 100);
         return {
-            code: `for var I := 0 to 10 do G := I;`,
-            expected: `(for (kFor) (assignment (varAssignDef (kVar) (identifier)) (kAssign) (literalNumber)) (kTo) (literalNumber) (kDo) (statement (assignment (identifier) (kAssign) (identifier))))`
+            code: `const ${id} = ${val};`,
+            expected: `(inlineConst (kConst) (identifier) (defaultValue (kEq) (literalNumber)))`
+        };
+    } else if (choice === 3) { // for-var loop
+        const loopVar = `I${Math.floor(Math.random() * 100)}`;
+        const limit = Math.floor(Math.random() * 20);
+        const body = genInlineWithOracle(depth - 1);
+        return {
+            code: `for var ${loopVar} := 0 to ${limit} do ${body.code}`,
+            expected: `(for (kFor) (assignment (varAssignDef (kVar) (identifier)) (kAssign) (literalNumber)) (kTo) (literalNumber) (kDo) ${body.expected})`
+        };
+    } else { // Inline var followed by usage
+        const id = `V${Math.floor(Math.random() * 1000)}`;
+        return {
+            code: `var ${id} := G + 1;`,
+            expected: `(assignment (varAssignDef (kVar) (identifier)) (kAssign) (exprBinary (identifier) (kAdd) (literalNumber)))`
         };
     }
 }
 
-const uniqueResults = new Map();
-let totalGenerated = 0;
-
-console.log("1. Validating toolchain...");
-const knownGood = createDelphiProgram("var I := 10; for var J := 0 to 5 do G := I + J;");
-fs.writeFileSync(tempFile, knownGood);
-try {
-    execSync(`${dcc32} -B -CC -W- -H- ${tempFile}`, { stdio: 'pipe' });
-    console.log("   [PASS] Toolchain is valid.");
-} catch (e) {
-    console.error("   [FAIL] Toolchain validation failed!");
-    console.error(e.stdout ? e.stdout.toString() : e.message);
-    process.exit(1);
+function wrapExpected(innerExpected) {
+    return `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) ${innerExpected} (kEnd))))`;
 }
 
-console.log("2. Fuzzing Inline Vars and Otherwise with Oracle...");
+// --- Main ---
+
+ensureTmpDir();
+const dcc32 = findDcc32();
+validateToolchain(dcc32, tempFile, createDelphiProgram("var I := 10; for var J := 0 to 5 do G := I + J;"));
+
+const { existingCode, maxTestId } = parseExistingCorpus(corpusFile);
+
+const newResults = new Map();
+let totalGenerated = 0;
+let skippedExisting = 0;
+
+console.log("2. Fuzzing Inline Vars/Consts with Oracle...");
 for (let i = 0; i < 300; i++) {
     totalGenerated++;
-    const oracle = genInlineWithOracle(Math.floor(Math.random() * 2));
+    const oracle = genInlineWithOracle(Math.floor(Math.random() * 3) + 1);
     const fullCode = oracle.code;
-    
-    if (uniqueResults.has(fullCode)) continue;
+
+    if (newResults.has(fullCode)) continue;
+
+    const codeBlock = `procedure Test;\nbegin\n  ${fullCode}\nend;`;
+    if (existingCode.has(codeBlock)) { skippedExisting++; continue; }
 
     fs.writeFileSync(tempFile, createDelphiProgram(fullCode));
     try {
         execSync(`${dcc32} -B -CC -W- -H- ${tempFile}`, { stdio: 'ignore' });
-        uniqueResults.set(fullCode, oracle.expected);
+        newResults.set(fullCode, oracle.expected);
         process.stdout.write('+');
     } catch (e) {
         process.stdout.write('.');
@@ -78,61 +112,29 @@ for (let i = 0; i < 300; i++) {
 }
 
 console.log(`\n\nGenerated: ${totalGenerated}`);
-console.log(`Compiling (Unique): ${uniqueResults.size}`);
+console.log(`Already in corpus: ${skippedExisting}`);
+console.log(`New unique compiled: ${newResults.size}`);
 
-// 3. Write corpus
-let corpusContent = "";
-let testId = 1;
-uniqueResults.forEach((expected, code) => {
-    const fullExpected = `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) ${expected} (kEnd))))`;
-    corpusContent += `===\nFuzzed Inline ${testId++}\n===\nprocedure Test;\nbegin\n  ${code}\nend;\n---\n${fullExpected}\n\n`;
+const newTests = [];
+let testId = maxTestId;
+newResults.forEach((expected, code) => {
+    testId++;
+    newTests.push({
+        name: `${TEST_PREFIX} ${testId}`,
+        code: `procedure Test;\nbegin\n  ${code}\nend;`,
+        expected: wrapExpected(expected)
+    });
 });
-fs.writeFileSync(corpusFile, corpusContent);
+appendToCorpus(corpusFile, newTests);
+console.log(`Appended ${newTests.length} new tests to ${corpusFile}`);
 
-console.log(`\n3. Running Tree-sitter Comparison...`);
-let passCount = 0;
-let failCount = 0;
+console.log("\n3. Running Tree-sitter Comparison...");
+const { passCount, failCount, firstMismatch } = compareWithOracle(newResults, wrapExpected);
 
-uniqueResults.forEach((expectedAST, code) => {
-    const testCode = `procedure Test; begin ${code} end;`;
-    fs.writeFileSync('temp_parse.pas', testCode);
-    
-    try {
-        const output = execSync(`npx tree-sitter parse temp_parse.pas`, { encoding: 'utf8' }).trim();
-        const actualAST = output.replace(/\s*\[\d+,\s*\d+\]\s*-\s*\[\d+,\s*\d+\]/g, '')
-                                .replace(/\w+:\s+/g, '')
-                                .replace(/\s+/g, ' ')
-                                .replace(/\(root\(/g, '(root (')
-                                .trim();
-        
-        const fullExpected = `(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) ${expectedAST} (kEnd))))`
-                                .replace(/\s+/g, ' ')
-                                .trim();
-
-        if (actualAST === fullExpected && !actualAST.includes('ERROR') && !actualAST.includes('MISSING')) {
-            passCount++;
-        } else {
-            failCount++;
-        }
-    } catch (e) {
-        failCount++;
-    }
+printReport('Inline Vars/Consts', {
+    totalGenerated, skippedExisting,
+    compiled: newResults.size,
+    passCount, failCount, firstMismatch
 });
 
-console.log("\nDIABOLICAL REPORT");
-console.log("=================");
-console.log(`Generated:         ${totalGenerated}`);
-console.log(`Compiled (Valid):  ${uniqueResults.size}`);
-console.log(`Matched Oracle:    ${passCount}`);
-console.log(`Mismatched Oracle: ${failCount}`);
-
-const yieldRate = (uniqueResults.size / totalGenerated) * 100;
-const failRate = (failCount / uniqueResults.size) * 100;
-
-console.log(`\nYield Rate:        ${yieldRate.toFixed(1)}% (Target: >20%)`);
-console.log(`Grammar Fail Rate: ${failRate.toFixed(1)}% (Target: >20%)`);
-
-// Cleanup
-if (fs.existsSync('temp_parse.pas')) fs.unlinkSync('temp_parse.pas');
-if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-if (fs.existsSync('fuzz_inline_temp.exe')) fs.unlinkSync('fuzz_inline_temp.exe');
+cleanup(tempFile);

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tree-sitter:*)",
+      "Bash(node:*)"
+    ]
+  }
+}

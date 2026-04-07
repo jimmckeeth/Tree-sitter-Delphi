@@ -2,17 +2,17 @@
 
 ## <a id="summary"></a>Summary
 
-| Category                                                |  Rules  | Tested  | Untested | Total Tests | Passing | Failing |
-| :------------------------------------------------------ | :-----: | :-----: | :------: | :---------: | :-----: | :-----: |
-| [Declarations & Definitions](#declarations-definitions) |   51    |   42    |    9     |     880     |   880   |    0    |
-| [Expressions](#expressions)                             |   13    |   11    |    2     |     695     |   695   |    0    |
-| [High-Level Structure](#high-level-structure)           |    9    |    9    |    0     |     886     |   886   |    0    |
-| [Internal Helpers](#internal-helpers)                   |   26    |    0    |    26    |      0      |    0    |    0    |
-| [Keywords & Terminals](#keywords-terminals)             |   163   |   112   |    51    |     885     |   885   |    0    |
-| [Literals](#literals)                                   |    7    |    6    |    1     |     328     |   328   |    0    |
-| [Other](#other)                                         |   12    |    5    |    7     |     886     |   886   |    0    |
-| [Statements](#statements)                               |   24    |   23    |    1     |     846     |   846   |    0    |
-| **TOTAL**                                               | **305** | **208** |  **97**  |   **887**   | **887** |  **0**  |
+| Category                                                |  Rules  | Tested  | Untested | Total Tests | Passing  | Failing |
+| :------------------------------------------------------ | :-----: | :-----: | :------: | :---------: | :------: | :-----: |
+| [Declarations & Definitions](#declarations-definitions) |   51    |   42    |    9     |    1580     |   1580   |    0    |
+| [Expressions](#expressions)                             |   13    |   11    |    2     |    1395     |   1395   |    0    |
+| [High-Level Structure](#high-level-structure)           |    9    |    9    |    0     |    1586     |   1586   |    0    |
+| [Internal Helpers](#internal-helpers)                   |   26    |    0    |    26    |      0      |    0     |    0    |
+| [Keywords & Terminals](#keywords-terminals)             |   163   |   112   |    51    |    1585     |   1585   |    0    |
+| [Literals](#literals)                                   |    7    |    6    |    1     |     328     |   328    |    0    |
+| [Other](#other)                                         |   12    |    5    |    7     |    1586     |   1586   |    0    |
+| [Statements](#statements)                               |   24    |   23    |    1     |    1546     |   1546   |    0    |
+| **TOTAL**                                               | **305** | **208** |  **97**  |  **1587**   | **1587** |  **0**  |
 
 ---
 
@@ -20,26 +20,26 @@
 
 | File                           | Tests | Passing | Failing |
 | :----------------------------- | :---: | :-----: | :-----: |
-| `attributes.txt`               |   3   |    3    |    0    |
-| `declarations.txt`             |  15   |   15    |    0    |
-| `diabolical-inline.txt`        |  103  |   102   |    1    |
-| `diabolical-logical.txt`       |  56   |   56    |    0    |
-| `diabolical-multiline.txt`     |  60   |   41    |   19    |
-| `diabolical-ternary.txt`       |  408  |   116   |   292   |
-| `expressions.txt`              |   9   |    9    |    0    |
-| `generics-delphi.txt`          |   4   |    4    |    0    |
-| `generics-fpc.txt`             |   5   |    5    |    0    |
-| `inlinevar.txt`                |   4   |    4    |    0    |
-| `lambdas.txt`                  |   2   |    2    |    0    |
-| `literals.txt`                 |   6   |    6    |    0    |
-| `modern_delphi.txt`            |  11   |   11    |    0    |
-| `modern_delphi_diabolical.txt` |  159  |   159   |    0    |
-| `modules.txt`                  |  10   |   10    |    0    |
-| `pascocoa.txt`                 |   3   |    3    |    0    |
-| `preprocessor.txt`             |   9   |    9    |    0    |
-| `preprocessor_nested.txt`      |   1   |    1    |    0    |
-| `routines.txt`                 |   5   |    5    |    0    |
-| `statements.txt`               |  13   |   13    |    0    |
+| `attributes.txt`               |   0   |    0    |    0    |
+| `declarations.txt`             |   0   |    0    |    0    |
+| `diabolical-inline.txt`        |   0   |    0    |    0    |
+| `diabolical-logical.txt`       |   0   |    0    |    0    |
+| `diabolical-multiline.txt`     |   0   |    0    |    0    |
+| `diabolical-ternary.txt`       |   0   |    0    |    0    |
+| `expressions.txt`              |   0   |    0    |    0    |
+| `generics-delphi.txt`          |   0   |    0    |    0    |
+| `generics-fpc.txt`             |   0   |    0    |    0    |
+| `inlinevar.txt`                |   0   |    0    |    0    |
+| `lambdas.txt`                  |   0   |    0    |    0    |
+| `literals.txt`                 |   0   |    0    |    0    |
+| `modern_delphi.txt`            |   0   |    0    |    0    |
+| `modern_delphi_diabolical.txt` |   0   |    0    |    0    |
+| `modules.txt`                  |   0   |    0    |    0    |
+| `pascocoa.txt`                 |   0   |    0    |    0    |
+| `preprocessor.txt`             |   0   |    0    |    0    |
+| `preprocessor_nested.txt`      |   0   |    0    |    0    |
+| `routines.txt`                 |   0   |    0    |    0    |
+| `statements.txt`               |   0   |    0    |    0    |
 
 ---
 
