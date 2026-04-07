@@ -11,8 +11,8 @@
 | [Keywords & Terminals](#keywords-terminals)             |   163   |   112   |    51    |     260     |   259   |    0    |
 | [Literals](#literals)                                   |    7    |    6    |    1     |     213     |   212   |    0    |
 | [Other](#other)                                         |   12    |    5    |    7     |     259     |   258   |    0    |
-| [Statements](#statements)                               |   24    |   23    |    1     |     661     |   249   |   412   |
-| **TOTAL**                                               | **305** | **208** |  **97**  |   **672**   | **259** | **412** |
+| [Statements](#statements)                               |   24    |   23    |    1     |     655     |   249   |   406   |
+| **TOTAL**                                               | **305** | **208** |  **97**  |   **666**   | **259** | **406** |
 
 ---
 
@@ -22,7 +22,7 @@
 | :----------------------------- | :---: | :-----: | :-----: |
 | `attributes.txt`               |   3   |    3    |    0    |
 | `declarations.txt`             |  15   |   15    |    0    |
-| `diabolical-ternary.txt`       |  412  |    0    |   412   |
+| `diabolical-ternary.txt`       |  406  |    0    |   406   |
 | `expressions.txt`              |   9   |    9    |    0    |
 | `generics-delphi.txt`          |   4   |    4    |    0    |
 | `generics-fpc.txt`             |   5   |    5    |    0    |
