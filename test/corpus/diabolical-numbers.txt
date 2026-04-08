@@ -1948,3 +1948,1903 @@ end;
 ---
 (root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
 
+===
+Fuzzed Numbers 196
+===
+procedure Test;
+begin
+  F := 4.538e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 197
+===
+procedure Test;
+begin
+  I := %1011_0110;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 198
+===
+procedure Test;
+begin
+  F := 505_649.562;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 199
+===
+procedure Test;
+begin
+  I := %1110_1000;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 200
+===
+procedure Test;
+begin
+  I := 440_083_257;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 201
+===
+procedure Test;
+begin
+  I := %1100_0001;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 202
+===
+procedure Test;
+begin
+  F := 20_955.370;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 203
+===
+procedure Test;
+begin
+  F := 5.832e9;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 204
+===
+procedure Test;
+begin
+  F := 653_908.216;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 205
+===
+procedure Test;
+begin
+  F := 5.211e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 206
+===
+procedure Test;
+begin
+  F := 887_679.977;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 207
+===
+procedure Test;
+begin
+  F := 6.472e3;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 208
+===
+procedure Test;
+begin
+  I := %1001_1000;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 209
+===
+procedure Test;
+begin
+  I := 916_291_275;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 210
+===
+procedure Test;
+begin
+  F := 3.701e4;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 211
+===
+procedure Test;
+begin
+  F := 296_668.854;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 212
+===
+procedure Test;
+begin
+  I := $57_25;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 213
+===
+procedure Test;
+begin
+  I := 676_530_141;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 214
+===
+procedure Test;
+begin
+  I := %1000_0010;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 215
+===
+procedure Test;
+begin
+  F := 431_814.455;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 216
+===
+procedure Test;
+begin
+  I := 262_892_196;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 217
+===
+procedure Test;
+begin
+  F := 813_724.062;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 218
+===
+procedure Test;
+begin
+  F := 4.558e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 219
+===
+procedure Test;
+begin
+  I := 12_864_485;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 220
+===
+procedure Test;
+begin
+  I := $1A_28;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 221
+===
+procedure Test;
+begin
+  F := 7.835e9;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 222
+===
+procedure Test;
+begin
+  I := $44_FB;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 223
+===
+procedure Test;
+begin
+  I := $E2_BA;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 224
+===
+procedure Test;
+begin
+  F := 74_448.668;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 225
+===
+procedure Test;
+begin
+  F := 7.850e5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 226
+===
+procedure Test;
+begin
+  F := 4.900e8;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 227
+===
+procedure Test;
+begin
+  I := 722_911_440;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 228
+===
+procedure Test;
+begin
+  I := %1010_0101;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 229
+===
+procedure Test;
+begin
+  I := %1100_1100;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 230
+===
+procedure Test;
+begin
+  F := 6.396e0;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 231
+===
+procedure Test;
+begin
+  I := 454_110_007;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 232
+===
+procedure Test;
+begin
+  F := 4.734e2;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 233
+===
+procedure Test;
+begin
+  F := 5.634e9;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 234
+===
+procedure Test;
+begin
+  F := 559_046.806;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 235
+===
+procedure Test;
+begin
+  I := $C2_37;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 236
+===
+procedure Test;
+begin
+  I := $49_12;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 237
+===
+procedure Test;
+begin
+  I := %1110_1010;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 238
+===
+procedure Test;
+begin
+  F := 912_474.896;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 239
+===
+procedure Test;
+begin
+  I := $B2_B5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 240
+===
+procedure Test;
+begin
+  F := 996_192.083;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 241
+===
+procedure Test;
+begin
+  I := $98_38;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 242
+===
+procedure Test;
+begin
+  F := 3.493e4;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 243
+===
+procedure Test;
+begin
+  I := 953_064_529;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 244
+===
+procedure Test;
+begin
+  F := 0.617e5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 245
+===
+procedure Test;
+begin
+  I := $27_73;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 246
+===
+procedure Test;
+begin
+  I := $7A_85;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 247
+===
+procedure Test;
+begin
+  F := 488_987.534;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 248
+===
+procedure Test;
+begin
+  I := 178_673_836;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 249
+===
+procedure Test;
+begin
+  I := %1010_1011;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 250
+===
+procedure Test;
+begin
+  I := $93_8B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 251
+===
+procedure Test;
+begin
+  F := 314_379.868;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 252
+===
+procedure Test;
+begin
+  F := 782_026.864;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 253
+===
+procedure Test;
+begin
+  F := 369_904.845;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 254
+===
+procedure Test;
+begin
+  I := 838_777_838;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 255
+===
+procedure Test;
+begin
+  I := %1001_0111;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 256
+===
+procedure Test;
+begin
+  F := 808_931.985;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 257
+===
+procedure Test;
+begin
+  F := 4.647e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 258
+===
+procedure Test;
+begin
+  I := 548_830_261;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 259
+===
+procedure Test;
+begin
+  I := $C1_4F;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 260
+===
+procedure Test;
+begin
+  F := 2.568e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 261
+===
+procedure Test;
+begin
+  I := %11_1000;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 262
+===
+procedure Test;
+begin
+  I := %0_0000;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 263
+===
+procedure Test;
+begin
+  I := 510_439_722;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 264
+===
+procedure Test;
+begin
+  I := $75_A5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 265
+===
+procedure Test;
+begin
+  I := %1000_0110;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 266
+===
+procedure Test;
+begin
+  F := 4.699e6;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 267
+===
+procedure Test;
+begin
+  I := %111_1110;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 268
+===
+procedure Test;
+begin
+  I := %1011_1101;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 269
+===
+procedure Test;
+begin
+  I := 113_065_210;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 270
+===
+procedure Test;
+begin
+  F := 4.137e9;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 271
+===
+procedure Test;
+begin
+  F := 2.090e6;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 272
+===
+procedure Test;
+begin
+  F := 9.225e9;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 273
+===
+procedure Test;
+begin
+  I := 662_133_836;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 274
+===
+procedure Test;
+begin
+  I := %101_1011;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 275
+===
+procedure Test;
+begin
+  I := %1100_0111;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 276
+===
+procedure Test;
+begin
+  I := $63_6C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 277
+===
+procedure Test;
+begin
+  I := 963_276_365;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 278
+===
+procedure Test;
+begin
+  F := 41_358.359;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 279
+===
+procedure Test;
+begin
+  I := %110_0111;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 280
+===
+procedure Test;
+begin
+  F := 663_422.637;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 281
+===
+procedure Test;
+begin
+  F := 108_097.238;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 282
+===
+procedure Test;
+begin
+  F := 404_742.538;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 283
+===
+procedure Test;
+begin
+  I := 381_283_738;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 284
+===
+procedure Test;
+begin
+  F := 0.323e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 285
+===
+procedure Test;
+begin
+  I := %1011_0101;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 286
+===
+procedure Test;
+begin
+  F := 7.658e3;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 287
+===
+procedure Test;
+begin
+  I := %1010_0011;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 288
+===
+procedure Test;
+begin
+  F := 700_626.950;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 289
+===
+procedure Test;
+begin
+  I := %1101_1110;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 290
+===
+procedure Test;
+begin
+  F := 358_003.081;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 291
+===
+procedure Test;
+begin
+  F := 1.384e5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 292
+===
+procedure Test;
+begin
+  I := $4B_1B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 293
+===
+procedure Test;
+begin
+  F := 5.335e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 294
+===
+procedure Test;
+begin
+  F := 7.807e6;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 295
+===
+procedure Test;
+begin
+  I := $30_ED;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 296
+===
+procedure Test;
+begin
+  F := 712_977.724;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 297
+===
+procedure Test;
+begin
+  I := 145_671_596;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 298
+===
+procedure Test;
+begin
+  I := %1100_1110;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 299
+===
+procedure Test;
+begin
+  F := 93_622.871;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 300
+===
+procedure Test;
+begin
+  I := %101_0100;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 301
+===
+procedure Test;
+begin
+  I := 268_587_809;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 302
+===
+procedure Test;
+begin
+  I := $28_E6;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 303
+===
+procedure Test;
+begin
+  I := %1001_1100;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 304
+===
+procedure Test;
+begin
+  F := 2.634e4;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 305
+===
+procedure Test;
+begin
+  F := 9.785e3;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 306
+===
+procedure Test;
+begin
+  I := $72_84;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 307
+===
+procedure Test;
+begin
+  I := $F5_2B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 308
+===
+procedure Test;
+begin
+  I := %1000_0011;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 309
+===
+procedure Test;
+begin
+  F := 8.654e4;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 310
+===
+procedure Test;
+begin
+  F := 317_880.763;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 311
+===
+procedure Test;
+begin
+  I := $4A_3B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 312
+===
+procedure Test;
+begin
+  F := 63_028.211;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 313
+===
+procedure Test;
+begin
+  I := $20_45;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 314
+===
+procedure Test;
+begin
+  I := 130_713_994;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 315
+===
+procedure Test;
+begin
+  F := 7.625e4;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 316
+===
+procedure Test;
+begin
+  I := %11_1001;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 317
+===
+procedure Test;
+begin
+  I := $34_AF;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 318
+===
+procedure Test;
+begin
+  I := %100_1011;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 319
+===
+procedure Test;
+begin
+  F := 740_249.027;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 320
+===
+procedure Test;
+begin
+  I := $7B_4E;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 321
+===
+procedure Test;
+begin
+  F := 677_322.254;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 322
+===
+procedure Test;
+begin
+  F := 7.544e3;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 323
+===
+procedure Test;
+begin
+  F := 9.147e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 324
+===
+procedure Test;
+begin
+  I := 40_278_604;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 325
+===
+procedure Test;
+begin
+  F := 502_080.792;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 326
+===
+procedure Test;
+begin
+  I := $75_32;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 327
+===
+procedure Test;
+begin
+  I := 103_936_972;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 328
+===
+procedure Test;
+begin
+  I := $D5_DC;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 329
+===
+procedure Test;
+begin
+  I := 153_697_117;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 330
+===
+procedure Test;
+begin
+  F := 2.487e5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 331
+===
+procedure Test;
+begin
+  F := 9.409e5;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 332
+===
+procedure Test;
+begin
+  F := 1.145e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 333
+===
+procedure Test;
+begin
+  F := 474_766.656;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 334
+===
+procedure Test;
+begin
+  I := %0_1100;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 335
+===
+procedure Test;
+begin
+  F := 1.899e6;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 336
+===
+procedure Test;
+begin
+  I := %101_1101;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 337
+===
+procedure Test;
+begin
+  F := 1.225e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 338
+===
+procedure Test;
+begin
+  F := 0.331e2;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 339
+===
+procedure Test;
+begin
+  I := %1011_0111;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 340
+===
+procedure Test;
+begin
+  I := 458_836_421;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 341
+===
+procedure Test;
+begin
+  F := 3.958e2;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 342
+===
+procedure Test;
+begin
+  I := $DD_DD;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 343
+===
+procedure Test;
+begin
+  I := $2D_16;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 344
+===
+procedure Test;
+begin
+  I := $81_92;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 345
+===
+procedure Test;
+begin
+  F := 884_758.746;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 346
+===
+procedure Test;
+begin
+  I := 145_749_119;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 347
+===
+procedure Test;
+begin
+  F := 158_952.956;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 348
+===
+procedure Test;
+begin
+  I := 1_358_061;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 349
+===
+procedure Test;
+begin
+  I := %11_0010;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 350
+===
+procedure Test;
+begin
+  I := $6B_DB;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 351
+===
+procedure Test;
+begin
+  F := 512_784.710;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 352
+===
+procedure Test;
+begin
+  F := 88_051.278;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 353
+===
+procedure Test;
+begin
+  I := 411_472_044;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 354
+===
+procedure Test;
+begin
+  F := 7.604e7;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 355
+===
+procedure Test;
+begin
+  I := $5B_BF;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 356
+===
+procedure Test;
+begin
+  I := 495_782_966;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 357
+===
+procedure Test;
+begin
+  F := 926_630.205;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 358
+===
+procedure Test;
+begin
+  I := 285_530_871;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 359
+===
+procedure Test;
+begin
+  I := 347_880_051;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 360
+===
+procedure Test;
+begin
+  F := 7.503e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 361
+===
+procedure Test;
+begin
+  I := %101_0110;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 362
+===
+procedure Test;
+begin
+  I := 861_130_840;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 363
+===
+procedure Test;
+begin
+  F := 0.466e3;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 364
+===
+procedure Test;
+begin
+  I := %0_0011;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 365
+===
+procedure Test;
+begin
+  F := 417_502.959;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 366
+===
+procedure Test;
+begin
+  I := %1110_1101;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 367
+===
+procedure Test;
+begin
+  I := 635_128_554;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 368
+===
+procedure Test;
+begin
+  I := $23_89;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 369
+===
+procedure Test;
+begin
+  F := 4.875e2;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 370
+===
+procedure Test;
+begin
+  F := 5.998e9;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 371
+===
+procedure Test;
+begin
+  I := %100_0010;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 372
+===
+procedure Test;
+begin
+  I := $F9_86;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 373
+===
+procedure Test;
+begin
+  F := 6.814e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 374
+===
+procedure Test;
+begin
+  F := 292_832.283;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 375
+===
+procedure Test;
+begin
+  F := 650_820.235;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 376
+===
+procedure Test;
+begin
+  I := $ED_3A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 377
+===
+procedure Test;
+begin
+  I := 407_430_784;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 378
+===
+procedure Test;
+begin
+  I := %1010_0111;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 379
+===
+procedure Test;
+begin
+  I := 371_929_575;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 380
+===
+procedure Test;
+begin
+  I := %111_0000;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 381
+===
+procedure Test;
+begin
+  F := 445_701.036;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 382
+===
+procedure Test;
+begin
+  F := 3.337e3;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 383
+===
+procedure Test;
+begin
+  I := 730_696_639;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 384
+===
+procedure Test;
+begin
+  F := 3.481e1;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+
+===
+Fuzzed Numbers 385
+===
+procedure Test;
+begin
+  F := 548_614.042;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (literalNumber)) (kEnd))))
+

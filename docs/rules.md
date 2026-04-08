@@ -4,15 +4,15 @@
 
 | Category                                                |  Rules  | Tested  | Untested | Total Tests | Passing  | Failing |
 | :------------------------------------------------------ | :-----: | :-----: | :------: | :---------: | :------: | :-----: |
-| [Declarations & Definitions](#declarations-definitions) |   51    |   42    |    9     |    1587     |   1559   |   28    |
-| [Expressions](#expressions)                             |   13    |   11    |    2     |     988     |   961    |   27    |
-| [High-Level Structure](#high-level-structure)           |    9    |    9    |    0     |    1593     |   1565   |   28    |
+| [Declarations & Definitions](#declarations-definitions) |   51    |   42    |    9     |    2751     |   2751   |    0    |
+| [Expressions](#expressions)                             |   13    |   11    |    2     |    1665     |   1665   |    0    |
+| [High-Level Structure](#high-level-structure)           |    9    |    9    |    0     |    2757     |   2757   |    0    |
 | [Internal Helpers](#internal-helpers)                   |   26    |    0    |    26    |      0      |    0     |    0    |
-| [Keywords & Terminals](#keywords-terminals)             |   163   |   112   |    51    |    1592     |   1564   |   28    |
-| [Literals](#literals)                                   |    7    |    6    |    1     |     989     |   961    |   28    |
-| [Other](#other)                                         |   12    |    5    |    7     |    1593     |   1565   |   28    |
-| [Statements](#statements)                               |   24    |   23    |    1     |    1539     |   1511   |   28    |
-| **TOTAL**                                               | **305** | **208** |  **97**  |  **1594**   | **1566** | **28**  |
+| [Keywords & Terminals](#keywords-terminals)             |   163   |   112   |    51    |    2756     |   2756   |    0    |
+| [Literals](#literals)                                   |    7    |    6    |    1     |    1717     |   1717   |    0    |
+| [Other](#other)                                         |   12    |    5    |    7     |    2757     |   2757   |    0    |
+| [Statements](#statements)                               |   24    |   23    |    1     |    2653     |   2653   |    0    |
+| **TOTAL**                                               | **305** | **208** |  **97**  |  **2758**   | **2758** |  **0**  |
 
 ---
 
@@ -20,29 +20,29 @@
 
 | File                           | Tests | Passing | Failing |
 | :----------------------------- | :---: | :-----: | :-----: |
-| `attributes.txt`               |   3   |    3    |    0    |
-| `declarations.txt`             |  15   |   15    |    0    |
-| `diabolical-inline.txt`        |  294  |   294   |    0    |
-| `diabolical-logical.txt`       |  87   |   87    |    0    |
-| `diabolical-multiline.txt`     |  105  |   77    |   28    |
-| `diabolical-numbers.txt`       |  195  |   195   |    0    |
-| `diabolical-preprocessor.txt`  |  80   |   80    |    0    |
-| `diabolical-records.txt`       |  14   |   14    |    0    |
-| `diabolical-ternary.txt`       |  407  |   407   |    0    |
-| `expressions.txt`              |   9   |    9    |    0    |
-| `generics-delphi.txt`          |   4   |    4    |    0    |
-| `generics-fpc.txt`             |   5   |    5    |    0    |
-| `inlinevar.txt`                |   4   |    4    |    0    |
-| `lambdas.txt`                  |   2   |    2    |    0    |
-| `literals.txt`                 |   6   |    6    |    0    |
-| `modern_delphi.txt`            |  11   |   11    |    0    |
-| `modern_delphi_diabolical.txt` |  311  |   311   |    0    |
-| `modules.txt`                  |  10   |   10    |    0    |
-| `pascocoa.txt`                 |   3   |    3    |    0    |
-| `preprocessor.txt`             |   9   |    9    |    0    |
-| `preprocessor_nested.txt`      |   1   |    1    |    0    |
-| `routines.txt`                 |   5   |    5    |    0    |
-| `statements.txt`               |  13   |   13    |    0    |
+| `attributes.txt`               |   0   |    0    |    0    |
+| `declarations.txt`             |   0   |    0    |    0    |
+| `diabolical-inline.txt`        |   0   |    0    |    0    |
+| `diabolical-logical.txt`       |   0   |    0    |    0    |
+| `diabolical-multiline.txt`     |   0   |    0    |    0    |
+| `diabolical-numbers.txt`       |   0   |    0    |    0    |
+| `diabolical-preprocessor.txt`  |   0   |    0    |    0    |
+| `diabolical-records.txt`       |   0   |    0    |    0    |
+| `diabolical-ternary.txt`       |   0   |    0    |    0    |
+| `expressions.txt`              |   0   |    0    |    0    |
+| `generics-delphi.txt`          |   0   |    0    |    0    |
+| `generics-fpc.txt`             |   0   |    0    |    0    |
+| `inlinevar.txt`                |   0   |    0    |    0    |
+| `lambdas.txt`                  |   0   |    0    |    0    |
+| `literals.txt`                 |   0   |    0    |    0    |
+| `modern_delphi.txt`            |   0   |    0    |    0    |
+| `modern_delphi_diabolical.txt` |   0   |    0    |    0    |
+| `modules.txt`                  |   0   |    0    |    0    |
+| `pascocoa.txt`                 |   0   |    0    |    0    |
+| `preprocessor.txt`             |   0   |    0    |    0    |
+| `preprocessor_nested.txt`      |   0   |    0    |    0    |
+| `routines.txt`                 |   0   |    0    |    0    |
+| `statements.txt`               |   0   |    0    |    0    |
 
 ---
 
@@ -196,7 +196,7 @@
 | **kCase**             | `declarations.txt`, `modern_delphi.txt`, `modern_delphi_diabolical.txt`, `statements.txt`                                                                                                                                                                                                                                                                                                                                                                                                           |
 | **kCdecl**            | `attributes.txt`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **kClass**            | `attributes.txt`, `declarations.txt`, `diabolical-records.txt`, `modern_delphi.txt`, `modern_delphi_diabolical.txt`, `modules.txt`, `pascocoa.txt`                                                                                                                                                                                                                                                                                                                                                  |
-| **kConst**            | `declarations.txt`, `diabolical-inline.txt`, `literals.txt`, `modern_delphi.txt`, `routines.txt`                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **kConst**            | `declarations.txt`, `diabolical-inline.txt`, `diabolical-records.txt`, `literals.txt`, `modern_delphi.txt`, `routines.txt`                                                                                                                                                                                                                                                                                                                                                                          |
 | **kConstref**         | _No explicit test found_                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | **kConstructor**      | `declarations.txt`, `routines.txt`                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **kCppdecl**          | _No explicit test found_                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |

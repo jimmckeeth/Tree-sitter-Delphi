@@ -20,7 +20,7 @@ For starters, we are systematically stress-testing the following modern Delphi f
 6. **Binary Literals:** e.g., `%1010` (Delphi 12)
 7. **Inline Variable Declarations:** `var I := 10;` inside code blocks (Delphi 10.3)
 8. **Inline Constant Declarations:** `const C = 42;` inside code blocks (Delphi 12)
-9. **The `otherwise` Keyword:** Used in `case` statements (Delphi 12)
+9. **The `otherwise` Keyword:** Used in `case` statements (Free Pascal / ISO Pascal)
 10. **Nested Preprocessor Directives:** Recursive `$ifdef` / `$if` blocks. (not new, but a discovered gap)
 
 ## The Workflow

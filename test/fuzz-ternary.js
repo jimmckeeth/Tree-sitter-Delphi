@@ -121,23 +121,58 @@ console.log(`\n\nGenerated: ${totalGenerated}`);
 console.log(`Already in corpus: ${skippedExisting}`);
 console.log(`New unique compiled: ${newResults.size}`);
 
-// Append new tests to corpus
+// 3. Running Tree-sitter Comparison...
+console.log("\n3. Running Tree-sitter Comparison and generating corpus...");
+let passCount = 0;
+let failCount = 0;
+let firstMismatch = null;
 const newTests = [];
 let testId = maxTestId;
-newResults.forEach((expected, code) => {
-    testId++;
-    newTests.push({
-        name: `${TEST_PREFIX} ${testId}`,
-        code: `procedure Test;\nbegin\n  ${code}\nend;`,
-        expected: wrapExpected(expected)
-    });
-});
-appendToCorpus(corpusFile, newTests);
-console.log(`Appended ${newTests.length} new tests to ${corpusFile}`);
 
-// Compare new tests against oracle
-console.log("\n3. Running Tree-sitter Comparison...");
-const { passCount, failCount, firstMismatch } = compareWithOracle(newResults, wrapExpected);
+const tempParseFile = `tmp/compare_ternary_${process.pid}.pas`;
+
+newResults.forEach((expectedInner, code) => {
+    testId++;
+    const fullCode = `procedure Test;\nbegin\n  ${code}\nend;`;
+    fs.writeFileSync(tempParseFile, fullCode + '\n');
+
+    const fullExpected = wrapExpected(expectedInner).replace(/\s+/g, ' ').trim();
+
+    try {
+        const output = execSync(`npx tree-sitter parse ${tempParseFile}`, { encoding: 'utf8' }).trim();
+        const actual = cleanParserOutput(output);
+
+        if (actual.includes('ERROR') || actual.includes('MISSING') || actual !== fullExpected) {
+            failCount++;
+            if (!firstMismatch) firstMismatch = { code, expected: fullExpected, actual };
+            newTests.push({
+                name: `${TEST_PREFIX} ${testId}`,
+                code: fullCode,
+                expected: fullExpected
+            });
+            process.stdout.write('F');
+        } else {
+            passCount++;
+            newTests.push({
+                name: `${TEST_PREFIX} ${testId}`,
+                code: fullCode,
+                expected: fullExpected
+            });
+            process.stdout.write('.');
+        }
+    } catch (e) {
+        failCount++;
+        newTests.push({
+            name: `${TEST_PREFIX} ${testId}`,
+            code: fullCode,
+            expected: fullExpected
+        });
+        process.stdout.write('X');
+    }
+});
+
+appendToCorpus(corpusFile, newTests);
+console.log(`\nAppended ${newTests.length} tests to ${corpusFile}`);
 
 printReport('Ternary Expressions', {
     totalGenerated, skippedExisting,
@@ -145,4 +180,5 @@ printReport('Ternary Expressions', {
     passCount, failCount, firstMismatch
 });
 
+if (fs.existsSync(tempParseFile)) fs.unlinkSync(tempParseFile);
 cleanup(tempFile);

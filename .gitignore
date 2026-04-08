@@ -10,3 +10,7 @@ uv.lock
 fuzz_*_temp.*
 temp_parse.pas
 tmp/
+**/__history
+*.local
+*.res
+*.dcu

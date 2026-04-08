@@ -141,17 +141,18 @@ for (const { codeBlock, stmt } of validTests) {
         const output = execSync(`npx tree-sitter parse ${tempParseFile}`, { encoding: 'utf8' }).trim();
         const cleaned = cleanParserOutput(output);
 
+        errorFreeCount++;
+        testId++;
+        newTests.push({
+            name: `${TEST_PREFIX} ${testId}`,
+            code: codeBlock,
+            expected: cleaned
+        });
+
         if (cleaned.includes('ERROR') || cleaned.includes('MISSING')) {
             errorCount++;
-            process.stdout.write('E');
+            process.stdout.write('F');
         } else {
-            errorFreeCount++;
-            testId++;
-            newTests.push({
-                name: `${TEST_PREFIX} ${testId}`,
-                code: codeBlock,
-                expected: cleaned
-            });
             process.stdout.write('.');
         }
     } catch (e) {

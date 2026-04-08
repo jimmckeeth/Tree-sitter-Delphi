@@ -85,47 +85,51 @@ function exportRules() {
     });
 
     // 3. Run tree-sitter test and parse results to update pass/fail status
-    let testOutput = "";
-    try {
-        // Run full test to ensure we get the failures list if anything fails
-        const cmd = process.platform === 'win32' 
-            ? 'chcp 65001 > nul && npx tree-sitter test' 
-            : 'npx tree-sitter test';
-        testOutput = execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
-    } catch (e) {
-        testOutput = e.stdout ? e.stdout.toString() : (e.stderr ? e.stderr.toString() : "");
-    }
-
     // Parse overview output to mark failing tests
     const fileStats = {}; // Keep for the file table
-    
-    // Find failures in the summary list (e.g., "  1. Fuzzed Multiline 6:")
     const failedTests = new Set();
-    const failuresSectionMatch = testOutput.match(/\d+ failures?:\s*\n\n([\s\S]*?)$/);
-    if (failuresSectionMatch) {
-        const failuresContent = failuresSectionMatch[1].replace(/\x1b\[[0-9;]*m/g, "");
-        const failureLines = failuresContent.split('\n');
-        failureLines.forEach(line => {
-            const m = line.match(/^\s+\d+\.\s+(.*?):/);
-            if (m) failedTests.add(m[1].trim());
-        });
-    }
+
+    console.log(`Scanning ${corpusFiles.length} corpus files for failures...`);
 
     corpusFiles.forEach(f => {
         const base = f.replace('.txt', '');
         fileStats[f] = { pass: 0, fail: 0 };
         
-        // Search for the file section, e.g., "  diabolical-multiline:"
+        let testOutput = "";
+        try {
+            // Filter by filename to get ALL tests for this file, bypassing global failure limits
+            const cmd = process.platform === 'win32' 
+                ? `chcp 65001 > nul && npx tree-sitter test -f ${base}` 
+                : `npx tree-sitter test -f ${base}`;
+            testOutput = execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
+        } catch (e) {
+            testOutput = e.stdout ? e.stdout.toString() : (e.stderr ? e.stderr.toString() : "");
+        }
+
+        // Strip ANSI and normalize
+        testOutput = testOutput.replace(/\x1b\[[0-9;]*m/g, "");
+
+        // 3a. Find failures in the summary list for this specific file
+        const failuresSectionMatch = testOutput.match(/\d+ failures?:\s*\n\n([\s\S]*?)$/);
+        if (failuresSectionMatch) {
+            const failuresContent = failuresSectionMatch[1];
+            const failureLines = failuresContent.split('\n');
+            failureLines.forEach(line => {
+                const m = line.match(/^\s+\d+\.\s+(.*?):/);
+                if (m) failedTests.add(m[1].trim());
+            });
+        }
+
+        // 3b. Match sections in overview
         const sectionRegex = new RegExp(`^\\s{2}${base}:`, 'm');
         const sectionMatch = testOutput.match(sectionRegex);
         
         if (sectionMatch) {
             const startIndex = sectionMatch.index;
-            // Section ends at the next file header or at the start of failures/results
             const nextSectionRegex = /\n  [\w-]+:|\n\d+ failure/;
             const sectionEndMatch = testOutput.slice(startIndex + 1).match(nextSectionRegex);
             const endIndex = sectionEndMatch ? startIndex + 1 + sectionEndMatch.index : testOutput.length;
-            const section = testOutput.slice(startIndex, endIndex).replace(/\x1b\[[0-9;]*m/g, "");
+            const section = testOutput.slice(startIndex, endIndex);
             
             const testLines = section.split('\n').filter(line => /^\s+\d+\.\s+\S/.test(line));
             testLines.forEach(line => {
@@ -133,12 +137,14 @@ function exportRules() {
                 const testName = nameMatch ? nameMatch[1].trim().replace(/\r/g, "") : "";
                 const testId = `${f}::${testName}`;
                 
-                // On Windows, the symbols might be mangled, so rely on the failedTests list
                 const isFail = failedTests.has(testName) || line.includes('Γ£ù') || line.includes('✗') || line.includes('\u2717');
                 const isPass = !isFail;
                 
                 if (allTestInfos[testId]) {
                     allTestInfos[testId].pass = isPass;
+                    if (!isPass) {
+                        console.log(`DEBUG: Found FAILURE for [${testId}]`);
+                    }
                 }
                 
                 if (isPass) fileStats[f].pass++;

@@ -122,37 +122,41 @@ for (const { code, expected } of validTests) {
     const testCode = `type TMyRecord = record\n  ${code.replace(/\n/g, '\n  ')}\nend;`;
     fs.writeFileSync(tempParseFile, testCode + '\n');
 
+    const fullExpected = wrapExpected(expected).replace(/\s+/g, ' ').trim();
+
     try {
         const output = execSync(`npx tree-sitter parse ${tempParseFile}`, { encoding: 'utf8' }).trim();
         const actual = cleanParserOutput(output);
 
-        const fullExpected = wrapExpected(expected).replace(/\s+/g, ' ').trim();
-
-        if (actual.includes('ERROR') || actual.includes('MISSING')) {
+        if (actual.includes('ERROR') || actual.includes('MISSING') || actual !== fullExpected) {
+            // It's a failure or a mismatch! We DEFINITELY want this in the corpus.
             errorCount++;
-            process.stdout.write('E');
-        } else if (actual !== fullExpected) {
-            // Log mismatch but keep it as a test if it's clean (no ERROR)
-            errorFreeCount++;
             testId++;
             newTests.push({
                 name: `${TEST_PREFIX} ${testId}`,
                 code: testCode,
-                expected: actual
+                expected: fullExpected // Use the ORACLE'S expectation, not the broken output
             });
-            process.stdout.write('M');
+            process.stdout.write('F'); // F for Failure added to corpus
         } else {
             errorFreeCount++;
             testId++;
             newTests.push({
                 name: `${TEST_PREFIX} ${testId}`,
                 code: testCode,
-                expected: actual
+                expected: fullExpected
             });
             process.stdout.write('.');
         }
     } catch (e) {
+        // Even if the command crashes, we want the test
         errorCount++;
+        testId++;
+        newTests.push({
+            name: `${TEST_PREFIX} ${testId}`,
+            code: testCode,
+            expected: fullExpected
+        });
         process.stdout.write('X');
     }
 }

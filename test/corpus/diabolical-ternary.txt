@@ -4068,3 +4068,3593 @@ end;
 ---
 (root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
 
+===
+Fuzzed Ternary 408
+===
+procedure Test;
+begin
+  Result := D + C + (if (C > D) then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 409
+===
+procedure Test;
+begin
+  Result := if (A < B) then C + C + (B + C) else if True then (D) else if False then B else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 410
+===
+procedure Test;
+begin
+  Result := if (A < B) then ((D)) else if False then A + A else B + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 411
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (C > D) then if False then if False then C else D else if False then C else A else if False then (D) else D + C else if (A < B) then if (C > D) then if (C > D) then D else A else if (C > D) then B else A else (if True then D else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 412
+===
+procedure Test;
+begin
+  Result := if True then if (C > D) then (if (C > D) then A else D) else (if True then D else A) + (if False then C else C) else if False then (C) + (if (A < B) then C else C) else (if (C > D) then B else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 413
+===
+procedure Test;
+begin
+  Result := if (A < B) then A + B else if True then D else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 414
+===
+procedure Test;
+begin
+  Result := if (A < B) then (if True then B else D) else if (C > D) then if (C > D) then C else A else C + A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 415
+===
+procedure Test;
+begin
+  Result := ((D + D)) + (if (A < B) then (if (A < B) then D else C) + (if True then D else A) else if (C > D) then if (C > D) then D else D else if (A < B) then A else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 416
+===
+procedure Test;
+begin
+  Result := (if (C > D) then B + D + (A + B) else if False then if False then A else D else C + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 417
+===
+procedure Test;
+begin
+  Result := B + C + (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 418
+===
+procedure Test;
+begin
+  Result := (if (A < B) then if (C > D) then A + C else (C) else A + B + (A)) + (((C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))) (kAdd) (exprParens (exprParens (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 419
+===
+procedure Test;
+begin
+  Result := if True then (if (C > D) then A else A) else (if (A < B) then B else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 420
+===
+procedure Test;
+begin
+  Result := if True then C + C + (C + A) else if True then B + A else (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 421
+===
+procedure Test;
+begin
+  Result := (if (C > D) then if (C > D) then (B) else A + B else if (A < B) then (D) else (D)) + ((if False then (D) else D + B) + (if (C > D) then if (C > D) then B else B else if False then A else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 422
+===
+procedure Test;
+begin
+  Result := (B + A) + ((D) + (B + B)) + (((C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kAdd) (exprParens (exprParens (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 423
+===
+procedure Test;
+begin
+  Result := ((D) + (D + C) + ((if (C > D) then D else B) + (B + D)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 424
+===
+procedure Test;
+begin
+  Result := ((if True then if True then C else D else (C)) + (if (A < B) then (B) else (D)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 425
+===
+procedure Test;
+begin
+  Result := if False then (A) else if (C > D) then B else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 426
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (A < B) then ((D)) else (if (A < B) then B else B) else if (C > D) then ((A)) else (D) + (C + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 427
+===
+procedure Test;
+begin
+  Result := if False then (B) else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 428
+===
+procedure Test;
+begin
+  Result := (if True then if True then A else B else (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 429
+===
+procedure Test;
+begin
+  Result := if (C > D) then ((B + D)) else (if (A < B) then B + B else if (C > D) then A else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 430
+===
+procedure Test;
+begin
+  Result := if False then C else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 431
+===
+procedure Test;
+begin
+  Result := (if (A < B) then C else A) + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 432
+===
+procedure Test;
+begin
+  Result := ((if True then A + D else (B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 433
+===
+procedure Test;
+begin
+  Result := if False then if False then (A + A) else (if True then C else A) + (B) else (if False then C else B) + (if True then if True then C else A else (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 434
+===
+procedure Test;
+begin
+  Result := if True then A else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 435
+===
+procedure Test;
+begin
+  Result := (if False then C + D else D + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 436
+===
+procedure Test;
+begin
+  Result := ((A + B + (B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 437
+===
+procedure Test;
+begin
+  Result := if (C > D) then ((B) + (D)) else (if (C > D) then B else C) + ((C) + (if (A < B) then B else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 438
+===
+procedure Test;
+begin
+  Result := (if True then A else C) + (if False then A else B) + ((if (C > D) then D else D) + (B + A)) + (if (C > D) then (B) + (if (C > D) then A else B) else (if (A < B) then B else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 439
+===
+procedure Test;
+begin
+  Result := if (C > D) then (if False then B else C) else (if (A < B) then C else B) + (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 440
+===
+procedure Test;
+begin
+  Result := if True then D else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 441
+===
+procedure Test;
+begin
+  Result := ((B + B + (A)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 442
+===
+procedure Test;
+begin
+  Result := (if False then (B) + (D + B) else A + A + (if (C > D) then B else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 443
+===
+procedure Test;
+begin
+  Result := (if True then B else B) + (if (C > D) then A else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 444
+===
+procedure Test;
+begin
+  Result := if False then (A) else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 445
+===
+procedure Test;
+begin
+  Result := if (A < B) then ((D + B)) else if False then ((A)) else (B + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 446
+===
+procedure Test;
+begin
+  Result := (A) + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 447
+===
+procedure Test;
+begin
+  Result := ((B) + (if (A < B) then B else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 448
+===
+procedure Test;
+begin
+  Result := (B) + (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 449
+===
+procedure Test;
+begin
+  Result := B + C + (if (A < B) then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 450
+===
+procedure Test;
+begin
+  Result := if True then (if True then C else A) + (if False then D else D) + ((D) + (if (C > D) then C else C)) else (if True then (A) else (C)) + ((D) + (if (C > D) then D else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 451
+===
+procedure Test;
+begin
+  Result := ((if False then C else A)) + (if (C > D) then (if False then D else C) + (if (A < B) then A else C) else (B) + (D + A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 452
+===
+procedure Test;
+begin
+  Result := (if True then B + A + (D + D) else (if (A < B) then C else B) + (A + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 453
+===
+procedure Test;
+begin
+  Result := (if (C > D) then (if (A < B) then A else B) + (D) else (B) + (if (C > D) then C else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 454
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (A < B) then D + D else (C) else (if False then D else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 455
+===
+procedure Test;
+begin
+  Result := (D + D + (if (C > D) then D else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 456
+===
+procedure Test;
+begin
+  Result := ((B)) + ((C) + (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 457
+===
+procedure Test;
+begin
+  Result := (if False then A + C else if (C > D) then C else B) + (C + D + (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 458
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (C > D) then (A) else A + A else (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 459
+===
+procedure Test;
+begin
+  Result := (if (C > D) then (A) else A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 460
+===
+procedure Test;
+begin
+  Result := ((if (A < B) then (A) else C + A) + (if False then if (C > D) then A else D else C + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 461
+===
+procedure Test;
+begin
+  Result := (if (A < B) then (A) else if True then D else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 462
+===
+procedure Test;
+begin
+  Result := ((if True then D + C else A + A) + ((if (A < B) then A else B) + (D)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 463
+===
+procedure Test;
+begin
+  Result := (if True then B else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 464
+===
+procedure Test;
+begin
+  Result := (if False then if True then A else C else if False then C else A) + (D + A + (B + A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 465
+===
+procedure Test;
+begin
+  Result := if (C > D) then C + A else if (A < B) then D else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 466
+===
+procedure Test;
+begin
+  Result := (if (C > D) then A else B) + (if True then C else D) + (if (A < B) then C else C) + (if True then A + D + (D) else (B) + (if True then B else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 467
+===
+procedure Test;
+begin
+  Result := if False then if False then (C) else B + D else (C) + (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 468
+===
+procedure Test;
+begin
+  Result := if (C > D) then (B + D + (C + A)) else ((if True then B else D) + (C + B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kElse) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 469
+===
+procedure Test;
+begin
+  Result := (if (A < B) then (C + C) else if (C > D) then D + A else (C)) + (if (A < B) then (if True then A else D) + (A) else (if (A < B) then D else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 470
+===
+procedure Test;
+begin
+  Result := ((D + A + (if True then D else C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 471
+===
+procedure Test;
+begin
+  Result := (if (A < B) then C + A else B + B) + (D + C + (if (A < B) then D else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 472
+===
+procedure Test;
+begin
+  Result := if False then if False then (if (C > D) then C else D) else (B + A) else ((A)) + ((D) + (A + A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 473
+===
+procedure Test;
+begin
+  Result := (if True then (D + C) else (if False then A else A) + (B + C)) + ((A) + (if True then C else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 474
+===
+procedure Test;
+begin
+  Result := ((C)) + (B + A + (D + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 475
+===
+procedure Test;
+begin
+  Result := (A + B) + (if (A < B) then A + B else if True then C else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 476
+===
+procedure Test;
+begin
+  Result := if False then B + D else A + C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 477
+===
+procedure Test;
+begin
+  Result := if (A < B) then (B) else if (A < B) then C else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 478
+===
+procedure Test;
+begin
+  Result := (if (C > D) then B + A else (D)) + (if (C > D) then if False then D else D else if True then B else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 479
+===
+procedure Test;
+begin
+  Result := ((if True then A else B) + (if (C > D) then B else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 480
+===
+procedure Test;
+begin
+  Result := ((D) + (C + B)) + (B + A + (B + C) + ((D) + (D + D)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kAdd) (exprParens (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))))) (kEnd))))
+
+===
+Fuzzed Ternary 481
+===
+procedure Test;
+begin
+  Result := ((if False then (D) else if (C > D) then D else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 482
+===
+procedure Test;
+begin
+  Result := ((if (C > D) then if (A < B) then C else C else if (A < B) then B else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 483
+===
+procedure Test;
+begin
+  Result := (D + A) + ((if (A < B) then A else D) + (D + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 484
+===
+procedure Test;
+begin
+  Result := (if True then C else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 485
+===
+procedure Test;
+begin
+  Result := if False then (if False then if True then B else D else (A)) + (if (A < B) then B else D) else if (A < B) then (if (C > D) then C else C) else if (C > D) then if (C > D) then D else A else A + D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 486
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then C + B else B + A else ((A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 487
+===
+procedure Test;
+begin
+  Result := ((B)) + (if False then A + A else C + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 488
+===
+procedure Test;
+begin
+  Result := (if (A < B) then if True then D else D else if False then D else D) + ((D) + (if (A < B) then B else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 489
+===
+procedure Test;
+begin
+  Result := ((B + C)) + (D + C + (A + B) + ((C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 490
+===
+procedure Test;
+begin
+  Result := (B) + (if (C > D) then C else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 491
+===
+procedure Test;
+begin
+  Result := A + C + (C + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 492
+===
+procedure Test;
+begin
+  Result := if (C > D) then C else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 493
+===
+procedure Test;
+begin
+  Result := ((C) + (C) + (D + B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 494
+===
+procedure Test;
+begin
+  Result := (if (A < B) then B else B) + (B + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 495
+===
+procedure Test;
+begin
+  Result := (C + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 496
+===
+procedure Test;
+begin
+  Result := if (A < B) then ((if False then A else A)) else if (C > D) then if (C > D) then (C) else (B) else if False then C + B else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 497
+===
+procedure Test;
+begin
+  Result := (B) + (if False then B else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 498
+===
+procedure Test;
+begin
+  Result := if False then if (C > D) then if False then if (C > D) then A else A else (A) else (if True then A else C) + (B + D) else if (A < B) then if True then if True then A else A else D + A else if (A < B) then if True then C else D else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 499
+===
+procedure Test;
+begin
+  Result := (if (C > D) then D else B) + (if True then B else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 500
+===
+procedure Test;
+begin
+  Result := C + C + (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 501
+===
+procedure Test;
+begin
+  Result := (if (C > D) then if (A < B) then C else D else if False then D else A) + (if False then A + A else if True then C else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 502
+===
+procedure Test;
+begin
+  Result := (B) + (C + B) + (if (A < B) then if (C > D) then D else D else B + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 503
+===
+procedure Test;
+begin
+  Result := (A) + (if False then A else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 504
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (A < B) then A else C else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 505
+===
+procedure Test;
+begin
+  Result := if False then ((A + B)) else (if False then B else B) + (A) + (if (C > D) then C + A else (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 506
+===
+procedure Test;
+begin
+  Result := if True then A + D + (A) else ((B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 507
+===
+procedure Test;
+begin
+  Result := ((if True then A else C)) + ((D) + (D) + (if True then B + D else B + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 508
+===
+procedure Test;
+begin
+  Result := (if (C > D) then C else A) + (if False then C else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 509
+===
+procedure Test;
+begin
+  Result := (B + B) + (if True then if (A < B) then B else A else C + D) + ((D + B) + ((B) + (if False then B else B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kAdd) (exprParens (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))))))) (kEnd))))
+
+===
+Fuzzed Ternary 510
+===
+procedure Test;
+begin
+  Result := if (A < B) then (A + B) else (B) + (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 511
+===
+procedure Test;
+begin
+  Result := if (C > D) then C else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 512
+===
+procedure Test;
+begin
+  Result := if False then (C) else if True then C else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 513
+===
+procedure Test;
+begin
+  Result := (if (C > D) then A + D else (B)) + (if False then if (C > D) then C else B else D + C) + (if False then (if (A < B) then D else D) + (C + D) else D + A + (if True then C else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 514
+===
+procedure Test;
+begin
+  Result := (if True then if (A < B) then C else B else (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 515
+===
+procedure Test;
+begin
+  Result := (if True then if (A < B) then D else D else if (C > D) then D else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 516
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (A < B) then (B) else B + A else ((D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 517
+===
+procedure Test;
+begin
+  Result := if (C > D) then if False then D + D + (C + B) else (B) + (D) else (if (C > D) then (C) else C + C) + ((if True then D else A) + (B + D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 518
+===
+procedure Test;
+begin
+  Result := (if False then if (C > D) then if (A < B) then B else A else if (A < B) then D else A else if False then (B) else D + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 519
+===
+procedure Test;
+begin
+  Result := (if True then if False then C else D else (A)) + (A + B + (if True then D else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 520
+===
+procedure Test;
+begin
+  Result := if True then (A) else (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 521
+===
+procedure Test;
+begin
+  Result := C + A + (B) + ((A) + (C + D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 522
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (A < B) then A else C else C + A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 523
+===
+procedure Test;
+begin
+  Result := (if (C > D) then (B) else A + D) + (if True then if (A < B) then A else C else if True then C else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 524
+===
+procedure Test;
+begin
+  Result := ((if (C > D) then D else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 525
+===
+procedure Test;
+begin
+  Result := (if False then C + C else if (A < B) then A else B) + (if (A < B) then (A) else (B)) + (if False then (D + D) else (B + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 526
+===
+procedure Test;
+begin
+  Result := (if False then C else B) + (C + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 527
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (C > D) then B else B else if True then D else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 528
+===
+procedure Test;
+begin
+  Result := ((if (A < B) then C else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 529
+===
+procedure Test;
+begin
+  Result := C + C + (if (C > D) then D else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 530
+===
+procedure Test;
+begin
+  Result := if True then ((A + C)) else if True then ((B)) else (if (C > D) then A else A) + (C + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 531
+===
+procedure Test;
+begin
+  Result := if False then (((B))) else (if False then if False then B else A else if (A < B) then D else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprParens (exprParens (identifier)))) (kElse) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 532
+===
+procedure Test;
+begin
+  Result := ((D) + (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 533
+===
+procedure Test;
+begin
+  Result := if True then (if True then (C) else (D)) else if (C > D) then (if (A < B) then A else A) + (D) else if True then (D) else C + C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 534
+===
+procedure Test;
+begin
+  Result := (if True then if (C > D) then A else A else D + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 535
+===
+procedure Test;
+begin
+  Result := if True then B + A else if False then B else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 536
+===
+procedure Test;
+begin
+  Result := (D + B + (if (A < B) then B else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 537
+===
+procedure Test;
+begin
+  Result := if False then if True then (D) else if True then B else D else if (C > D) then (A) else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 538
+===
+procedure Test;
+begin
+  Result := ((if (C > D) then C else A) + (B) + ((C) + (if (A < B) then B else B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 539
+===
+procedure Test;
+begin
+  Result := (if True then D + C else D + C) + (if False then B + A else (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 540
+===
+procedure Test;
+begin
+  Result := if True then (if True then if False then D else B else (B)) else if (C > D) then ((D)) else (C + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 541
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (C > D) then (if (A < B) then B else D) + (D) else if (C > D) then B + B else A + D else (if (A < B) then if True then C else A else (D)) + (if (C > D) then (B) else B + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 542
+===
+procedure Test;
+begin
+  Result := if (A < B) then (if (A < B) then D else A) else if True then (C) else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 543
+===
+procedure Test;
+begin
+  Result := if (C > D) then if False then B else A else C + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 544
+===
+procedure Test;
+begin
+  Result := D + B + (if True then A else A) + (if False then C + B else (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 545
+===
+procedure Test;
+begin
+  Result := if True then if True then (if (A < B) then C else A) + (B) else (if True then B else C) else if (A < B) then ((C)) else if True then (A) else (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 546
+===
+procedure Test;
+begin
+  Result := (if (C > D) then D else B) + (if (C > D) then A else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 547
+===
+procedure Test;
+begin
+  Result := if (C > D) then ((B)) else (if (C > D) then C else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 548
+===
+procedure Test;
+begin
+  Result := (C) + (C) + ((A) + (if (C > D) then B else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 549
+===
+procedure Test;
+begin
+  Result := if False then D + B + (D + B) else if False then if (A < B) then C else D else if False then A else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 550
+===
+procedure Test;
+begin
+  Result := (if (C > D) then C else C) + (if (C > D) then D else B) + (if (A < B) then B + B else B + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 551
+===
+procedure Test;
+begin
+  Result := ((C + C + (if (A < B) then D else B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 552
+===
+procedure Test;
+begin
+  Result := if (C > D) then C + A + (B + B) else (if (A < B) then B else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 553
+===
+procedure Test;
+begin
+  Result := (if (C > D) then if (A < B) then A else C else C + A) + (if (C > D) then B + A else (A)) + (if False then (A) + (C) else (if True then A else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 554
+===
+procedure Test;
+begin
+  Result := if (A < B) then if False then A else B else if (A < B) then A else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 555
+===
+procedure Test;
+begin
+  Result := ((if False then D else D) + (if False then D + A else C + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 556
+===
+procedure Test;
+begin
+  Result := (A) + (B) + ((A) + (if (A < B) then D else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 557
+===
+procedure Test;
+begin
+  Result := (if (C > D) then (C) else D + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 558
+===
+procedure Test;
+begin
+  Result := if True then if False then A else C else if False then C else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 559
+===
+procedure Test;
+begin
+  Result := if (C > D) then (if (C > D) then C + C else (A)) + (B + A) else (if False then C else A) + (if (A < B) then C else C) + (A + C + (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 560
+===
+procedure Test;
+begin
+  Result := ((D)) + ((D)) + (((A)) + ((if False then C else D) + (if True then D else C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))))) (kEnd))))
+
+===
+Fuzzed Ternary 561
+===
+procedure Test;
+begin
+  Result := (if True then A else D) + (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 562
+===
+procedure Test;
+begin
+  Result := if (C > D) then (if True then A else B) else ((B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 563
+===
+procedure Test;
+begin
+  Result := (A + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 564
+===
+procedure Test;
+begin
+  Result := if True then ((if (C > D) then B else A)) else (if (C > D) then (D) else B + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 565
+===
+procedure Test;
+begin
+  Result := C + B + (B + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 566
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then (A) else A + A else if (C > D) then if False then B else A else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 567
+===
+procedure Test;
+begin
+  Result := (C) + (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 568
+===
+procedure Test;
+begin
+  Result := B + D + (if (A < B) then A else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 569
+===
+procedure Test;
+begin
+  Result := if False then (A + B) else C + D + (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 570
+===
+procedure Test;
+begin
+  Result := if (A < B) then C + D else A + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 571
+===
+procedure Test;
+begin
+  Result := if False then C else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 572
+===
+procedure Test;
+begin
+  Result := if False then B else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 573
+===
+procedure Test;
+begin
+  Result := if (C > D) then (C) + (C + C) else (C) + (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 574
+===
+procedure Test;
+begin
+  Result := if True then if (C > D) then ((D)) else (B) + (if (C > D) then B else D) else (if (C > D) then C else C) + (D) + (A + D + (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kElse) (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 575
+===
+procedure Test;
+begin
+  Result := B + A + (B) + (if (A < B) then (B) else (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 576
+===
+procedure Test;
+begin
+  Result := (if True then B + B else if (A < B) then A else B) + (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 577
+===
+procedure Test;
+begin
+  Result := ((if False then A + C else C + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 578
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then A + A else A + C else ((D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 579
+===
+procedure Test;
+begin
+  Result := ((if (A < B) then C else D) + (C + B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 580
+===
+procedure Test;
+begin
+  Result := if False then C + C else if (A < B) then A else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 581
+===
+procedure Test;
+begin
+  Result := D + C + (if (A < B) then B else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 582
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then C + D else B + B else (B) + (C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 583
+===
+procedure Test;
+begin
+  Result := (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 584
+===
+procedure Test;
+begin
+  Result := (((A)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 585
+===
+procedure Test;
+begin
+  Result := if (C > D) then B + B else if False then A else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 586
+===
+procedure Test;
+begin
+  Result := (if (A < B) then (A) else C + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 587
+===
+procedure Test;
+begin
+  Result := if False then (if True then if (A < B) then C else C else if True then B else A) + (if (A < B) then D + D else (A)) else (if (C > D) then (C) else B + A) + (C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 588
+===
+procedure Test;
+begin
+  Result := if (C > D) then B + C + (if (A < B) then B else D) + (if (C > D) then (B) else if False then C else C) else if (A < B) then (A) + (C + B) else ((C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 589
+===
+procedure Test;
+begin
+  Result := if True then (D + D) else if (C > D) then D + B else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 590
+===
+procedure Test;
+begin
+  Result := (C) + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 591
+===
+procedure Test;
+begin
+  Result := if (A < B) then ((B + D)) else C + A + (B + D) + (if (C > D) then if (C > D) then C else C else if (C > D) then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 592
+===
+procedure Test;
+begin
+  Result := (D + A) + (C + C + (if False then C else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 593
+===
+procedure Test;
+begin
+  Result := if True then A + A + (if False then C else A) else (B + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 594
+===
+procedure Test;
+begin
+  Result := (if True then ((A)) else (if True then A else A) + (if False then A else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 595
+===
+procedure Test;
+begin
+  Result := C + A + (C + B) + (if (C > D) then A + B else if (A < B) then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 596
+===
+procedure Test;
+begin
+  Result := if (A < B) then (D) else A + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 597
+===
+procedure Test;
+begin
+  Result := (if False then D + B else (B)) + (if True then ((C)) else ((D)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprParens (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 598
+===
+procedure Test;
+begin
+  Result := if True then (if False then A else A) + (if False then A else D) else C + D + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 599
+===
+procedure Test;
+begin
+  Result := (if False then (D) else C + B) + (if (C > D) then if False then D else D else if (C > D) then B else A) + (if True then (if (A < B) then A else A) else (if True then D else D) + (D + D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 600
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (C > D) then D + B else (A) else (if False then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 601
+===
+procedure Test;
+begin
+  Result := if (A < B) then D else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 602
+===
+procedure Test;
+begin
+  Result := if True then B else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 603
+===
+procedure Test;
+begin
+  Result := (((D))) + (if False then A + D else (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 604
+===
+procedure Test;
+begin
+  Result := ((if False then (A) else C + A) + (if True then A + A else (B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 605
+===
+procedure Test;
+begin
+  Result := if True then (C + D) + (if (C > D) then (B) else B + C) else ((if (A < B) then A else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kElse) (exprParens (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 606
+===
+procedure Test;
+begin
+  Result := (if True then (C) + (B + B) else (B + D)) + ((D + A) + (if False then B else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kAdd) (exprParens (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 607
+===
+procedure Test;
+begin
+  Result := (((if (C > D) then B else D) + (B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 608
+===
+procedure Test;
+begin
+  Result := (D) + (C) + ((B) + (if (A < B) then B else D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 609
+===
+procedure Test;
+begin
+  Result := ((if False then A + D else (B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 610
+===
+procedure Test;
+begin
+  Result := if True then if (A < B) then C else A else if True then D else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 611
+===
+procedure Test;
+begin
+  Result := (if False then if True then A else C else (D)) + ((if (C > D) then D else C) + (if (C > D) then D else D)) + ((if (A < B) then (A) else (B)) + (if (A < B) then C + B else if True then A else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 612
+===
+procedure Test;
+begin
+  Result := (B) + (if (C > D) then A else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 613
+===
+procedure Test;
+begin
+  Result := (if (C > D) then B else C) + (B + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 614
+===
+procedure Test;
+begin
+  Result := (if (A < B) then (if (A < B) then C else A) else ((B))) + ((if (A < B) then A else D) + (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 615
+===
+procedure Test;
+begin
+  Result := (if False then (B) else if (A < B) then B else A) + (if (A < B) then (A) else B + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 616
+===
+procedure Test;
+begin
+  Result := if True then B + C else (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 617
+===
+procedure Test;
+begin
+  Result := A + C + (D + A) + (C + D + (if (A < B) then D else B)) + (if True then if True then C + B else if False then A else C else (if (A < B) then B else B) + (C + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 618
+===
+procedure Test;
+begin
+  Result := (if True then D else C) + (C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 619
+===
+procedure Test;
+begin
+  Result := (C) + (if True then D else A) + (C + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 620
+===
+procedure Test;
+begin
+  Result := (if (C > D) then D else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 621
+===
+procedure Test;
+begin
+  Result := if (A < B) then (((D))) else if True then ((D)) else A + D + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (exprParens (identifier)))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 622
+===
+procedure Test;
+begin
+  Result := (((D)) + (D + D + (if (A < B) then A else C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 623
+===
+procedure Test;
+begin
+  Result := ((if False then D else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 624
+===
+procedure Test;
+begin
+  Result := ((if False then (D) else A + C) + ((B) + (C + A)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 625
+===
+procedure Test;
+begin
+  Result := (C + A + (if (C > D) then D else C) + (A + D + (A + D)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 626
+===
+procedure Test;
+begin
+  Result := if False then (C) else if (C > D) then A else C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 627
+===
+procedure Test;
+begin
+  Result := ((C) + (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 628
+===
+procedure Test;
+begin
+  Result := (if (C > D) then if (A < B) then C else D else (C)) + ((C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 629
+===
+procedure Test;
+begin
+  Result := ((if (C > D) then C else A) + (if (C > D) then A else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 630
+===
+procedure Test;
+begin
+  Result := if (C > D) then (if (C > D) then C else A) + (if True then A else A) else ((C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 631
+===
+procedure Test;
+begin
+  Result := if False then C + D else B + A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 632
+===
+procedure Test;
+begin
+  Result := (if False then B else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 633
+===
+procedure Test;
+begin
+  Result := (if False then B + C else if False then D else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 634
+===
+procedure Test;
+begin
+  Result := (if True then (B) else (D)) + (if (C > D) then if (C > D) then A + D else (D) else if (A < B) then (A) else C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 635
+===
+procedure Test;
+begin
+  Result := if True then if (A < B) then B else D else B + D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 636
+===
+procedure Test;
+begin
+  Result := (((if True then A else A)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 637
+===
+procedure Test;
+begin
+  Result := ((if False then A else C)) + ((if (A < B) then (A) else if False then A else B) + (if (C > D) then if True then C else D else if False then A else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 638
+===
+procedure Test;
+begin
+  Result := ((B + C)) + ((if True then D else C) + (if True then D else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 639
+===
+procedure Test;
+begin
+  Result := if True then if (A < B) then D else A else D + C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 640
+===
+procedure Test;
+begin
+  Result := if False then (if False then A else C) else (if True then B else A) + (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 641
+===
+procedure Test;
+begin
+  Result := (if True then A else A) + (D + C) + ((B) + (A + A) + (if (C > D) then if False then D else A else D + C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 642
+===
+procedure Test;
+begin
+  Result := if (A < B) then A + A else C + A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 643
+===
+procedure Test;
+begin
+  Result := (C) + (if (A < B) then A else A) + (D + C + (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 644
+===
+procedure Test;
+begin
+  Result := (if (A < B) then B else A) + (if (A < B) then D else B) + (if False then B else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 645
+===
+procedure Test;
+begin
+  Result := C + B + (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 646
+===
+procedure Test;
+begin
+  Result := (if (C > D) then B + D else D + A) + (if (A < B) then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 647
+===
+procedure Test;
+begin
+  Result := (((D) + (B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 648
+===
+procedure Test;
+begin
+  Result := (if (C > D) then C else B) + (if False then B else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 649
+===
+procedure Test;
+begin
+  Result := (A) + (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 650
+===
+procedure Test;
+begin
+  Result := if False then if True then A else A else if False then A else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 651
+===
+procedure Test;
+begin
+  Result := (if True then (B) else (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 652
+===
+procedure Test;
+begin
+  Result := (if True then A else D) + (if (A < B) then B + A else (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 653
+===
+procedure Test;
+begin
+  Result := if (C > D) then (A) else A + D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 654
+===
+procedure Test;
+begin
+  Result := ((if False then if True then C else B else A + B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 655
+===
+procedure Test;
+begin
+  Result := if False then B else B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 656
+===
+procedure Test;
+begin
+  Result := A + A + (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 657
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (C > D) then ((A)) else (if (C > D) then C else D) else (if (C > D) then D else A) + ((A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 658
+===
+procedure Test;
+begin
+  Result := if (C > D) then (A) + (C + B) + ((B) + (if (A < B) then A else B)) else (if True then C + D else (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 659
+===
+procedure Test;
+begin
+  Result := (A + B + (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 660
+===
+procedure Test;
+begin
+  Result := ((if (A < B) then if True then C else B else if (C > D) then A else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 661
+===
+procedure Test;
+begin
+  Result := (B) + (B + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 662
+===
+procedure Test;
+begin
+  Result := if (A < B) then A + C else if False then A else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 663
+===
+procedure Test;
+begin
+  Result := (D) + (if (A < B) then C else D) + (D + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 664
+===
+procedure Test;
+begin
+  Result := if True then if (A < B) then if (A < B) then C + B else if (A < B) then C else C else ((B)) else if (A < B) then (D + B) else if (C > D) then (B) else B + C;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprParens (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 665
+===
+procedure Test;
+begin
+  Result := (if (A < B) then (if False then B else B) + (A + A) else D + B + (if (C > D) then C else A)) + (if True then if (A < B) then (D) else (B) else C + B + (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 666
+===
+procedure Test;
+begin
+  Result := (((B))) + ((C + C) + (B + B + (B + A)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))))) (kEnd))))
+
+===
+Fuzzed Ternary 667
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (A < B) then (if False then D else B) + (A) else (if True then C else D) else (if (C > D) then (D) else D + A) + (B + B + (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 668
+===
+procedure Test;
+begin
+  Result := (if True then if (A < B) then B else B else C + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 669
+===
+procedure Test;
+begin
+  Result := if (C > D) then (if (A < B) then B else C) else if (A < B) then if True then C else C else (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 670
+===
+procedure Test;
+begin
+  Result := if False then (if False then B else B) + (D + A) else (C + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 671
+===
+procedure Test;
+begin
+  Result := if False then (A) else if (C > D) then C else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 672
+===
+procedure Test;
+begin
+  Result := if (A < B) then (if True then A + B else if True then D else A) + (C + C + (C)) else if True then ((B)) else if False then if (C > D) then A else B else B + D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 673
+===
+procedure Test;
+begin
+  Result := (((A) + (A)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 674
+===
+procedure Test;
+begin
+  Result := (if True then (B) + (A + C) else ((C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 675
+===
+procedure Test;
+begin
+  Result := (if (A < B) then A else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 676
+===
+procedure Test;
+begin
+  Result := if False then (((D))) else if (C > D) then (if False then A else A) else if False then if (C > D) then D else C else C + D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprParens (exprParens (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 677
+===
+procedure Test;
+begin
+  Result := B + C + (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 678
+===
+procedure Test;
+begin
+  Result := if (A < B) then C else A;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 679
+===
+procedure Test;
+begin
+  Result := (if False then B else D) + (if (A < B) then D else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 680
+===
+procedure Test;
+begin
+  Result := ((A)) + ((C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprParens (identifier))) (kAdd) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 681
+===
+procedure Test;
+begin
+  Result := ((D) + (if (C > D) then A else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 682
+===
+procedure Test;
+begin
+  Result := A + D + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 683
+===
+procedure Test;
+begin
+  Result := (if False then B else B) + (A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 684
+===
+procedure Test;
+begin
+  Result := if (C > D) then if False then C + B + (B) else if True then (D) else (A) else (if (A < B) then if True then B else A else (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 685
+===
+procedure Test;
+begin
+  Result := (if True then (C) else D + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 686
+===
+procedure Test;
+begin
+  Result := (if True then if (A < B) then B else C else if (C > D) then B else C) + ((C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 687
+===
+procedure Test;
+begin
+  Result := if (C > D) then if (A < B) then if (C > D) then (B) else (D) else B + C + (B) else (if (C > D) then D else D) + ((if True then B else C) + (if False then A else A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 688
+===
+procedure Test;
+begin
+  Result := if False then (D) else if True then D else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 689
+===
+procedure Test;
+begin
+  Result := (if True then ((B)) else if False then A + D else A + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 690
+===
+procedure Test;
+begin
+  Result := C + B + (C) + (A + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 691
+===
+procedure Test;
+begin
+  Result := (C + B + (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 692
+===
+procedure Test;
+begin
+  Result := (B + C) + (if (C > D) then if (A < B) then A else A else (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 693
+===
+procedure Test;
+begin
+  Result := ((C) + (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 694
+===
+procedure Test;
+begin
+  Result := if (C > D) then C + D else (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 695
+===
+procedure Test;
+begin
+  Result := if True then if True then D else B else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 696
+===
+procedure Test;
+begin
+  Result := (if (C > D) then (A) else if True then B else B) + (C + C + (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 697
+===
+procedure Test;
+begin
+  Result := (if (A < B) then if (C > D) then D + A else B + D else if True then B + D else (B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 698
+===
+procedure Test;
+begin
+  Result := (A + D + (D) + ((D) + (C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 699
+===
+procedure Test;
+begin
+  Result := if False then (if (A < B) then A + D else if (A < B) then C else D) + (if True then D + C else B + A) else (if (C > D) then D + D else C + B) + (if (A < B) then A + B else (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 700
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then if True then B else D else D + C else (if False then B else B) + (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 701
+===
+procedure Test;
+begin
+  Result := if (A < B) then A + C else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 702
+===
+procedure Test;
+begin
+  Result := (D) + (if True then D else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 703
+===
+procedure Test;
+begin
+  Result := (B + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 704
+===
+procedure Test;
+begin
+  Result := if False then (D + C) else C + D + (D + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 705
+===
+procedure Test;
+begin
+  Result := (D) + (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 706
+===
+procedure Test;
+begin
+  Result := if False then if (A < B) then C else D else D + D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 707
+===
+procedure Test;
+begin
+  Result := if (A < B) then if False then C else C else D + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 708
+===
+procedure Test;
+begin
+  Result := if False then ((if True then D else A)) else C + C + (if (A < B) then D else B) + ((C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 709
+===
+procedure Test;
+begin
+  Result := D + B + (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 710
+===
+procedure Test;
+begin
+  Result := (A + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 711
+===
+procedure Test;
+begin
+  Result := (if (C > D) then if False then (D) else if (C > D) then D else B else (if (A < B) then A else C)) + ((A + D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kAdd) (exprParens (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 712
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (C > D) then A else A else (D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 713
+===
+procedure Test;
+begin
+  Result := ((if False then A else B) + (A)) + (if False then (if (C > D) then A else C) else (B + D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 714
+===
+procedure Test;
+begin
+  Result := if False then A + B + (A) else ((B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 715
+===
+procedure Test;
+begin
+  Result := ((if True then A + D else if True then A else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 716
+===
+procedure Test;
+begin
+  Result := if False then D + A + (C) + (B + C) else (if True then (C) else if False then C else C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 717
+===
+procedure Test;
+begin
+  Result := if (A < B) then (if False then (A) else C + A) + ((if False then D else B) + (if True then A else C)) else if (C > D) then if (A < B) then if (C > D) then D else D else (C) else if False then A + B else (C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 718
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then (B + D) else if False then (D) else D + B else if False then (if True then A else A) + (C + C) else if False then (C) else if (C > D) then D else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 719
+===
+procedure Test;
+begin
+  Result := ((if (A < B) then C else A) + (A + B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 720
+===
+procedure Test;
+begin
+  Result := if (C > D) then A + D + (B + D) + (if False then (D) else if (C > D) then C else B) else (if True then (B) else D + D) + (if True then if (C > D) then C else A else C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 721
+===
+procedure Test;
+begin
+  Result := if (A < B) then A + A + (if (C > D) then B else C) else (if (A < B) then A else C) + (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 722
+===
+procedure Test;
+begin
+  Result := (if False then if False then B else C else C + C) + (if True then if False then B else D else B + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 723
+===
+procedure Test;
+begin
+  Result := (if True then C else A) + (B) + (A + A) + ((if True then B else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 724
+===
+procedure Test;
+begin
+  Result := if (A < B) then B + D else A + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 725
+===
+procedure Test;
+begin
+  Result := ((if False then C else C) + (A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 726
+===
+procedure Test;
+begin
+  Result := if True then ((if True then D else D)) else if (C > D) then (D + D) else (if True then B else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 727
+===
+procedure Test;
+begin
+  Result := (A + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 728
+===
+procedure Test;
+begin
+  Result := if (A < B) then ((if False then C else C) + (if (C > D) then D else A)) else (if False then C else B) + ((C) + (C + A));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))))) (kEnd))))
+
+===
+Fuzzed Ternary 729
+===
+procedure Test;
+begin
+  Result := (if True then (C) else (C)) + ((if False then D else B) + (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 730
+===
+procedure Test;
+begin
+  Result := if False then (B + C) else (A) + (if (A < B) then A else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 731
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (C > D) then B + B else D + C else (A + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprBinary (identifier) (kAdd) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 732
+===
+procedure Test;
+begin
+  Result := (if True then if True then D else C else A + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 733
+===
+procedure Test;
+begin
+  Result := ((if True then (B) else (C)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 734
+===
+procedure Test;
+begin
+  Result := ((D + C + (if True then C else B)));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 735
+===
+procedure Test;
+begin
+  Result := (A) + (if False then D else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 736
+===
+procedure Test;
+begin
+  Result := (if (A < B) then (B) else B + A) + (if True then if (C > D) then B else D else (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 737
+===
+procedure Test;
+begin
+  Result := if False then (D) else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 738
+===
+procedure Test;
+begin
+  Result := B + C + (C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 739
+===
+procedure Test;
+begin
+  Result := if True then if (A < B) then (A) else (D) else if (A < B) then if False then C else D else (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 740
+===
+procedure Test;
+begin
+  Result := (B + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 741
+===
+procedure Test;
+begin
+  Result := if False then if False then D else C else (A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 742
+===
+procedure Test;
+begin
+  Result := (if (C > D) then C else B) + (if False then C else A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 743
+===
+procedure Test;
+begin
+  Result := if (C > D) then if False then (C + D) else if (A < B) then (A) else if True then A else B else if True then A + A + (if False then C else B) else (if False then C else D) + (if (C > D) then C else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier)))) (kElse) (exprBinary (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 744
+===
+procedure Test;
+begin
+  Result := (if (C > D) then if False then if True then C else C else if (A < B) then A else D else ((A))) + (if True then (A + D) else if False then (B) else (C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprParens (exprParens (identifier))))) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprParens (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 745
+===
+procedure Test;
+begin
+  Result := if (A < B) then A else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 746
+===
+procedure Test;
+begin
+  Result := (A) + (if (C > D) then D else B) + ((A) + (if True then D else C)) + (D + B + (if True then D else B));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kAdd) (exprParens (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 747
+===
+procedure Test;
+begin
+  Result := (A) + (if True then B else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 748
+===
+procedure Test;
+begin
+  Result := (if True then (D) else D + C) + ((if (C > D) then A else D) + (D));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kAdd) (exprParens (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 749
+===
+procedure Test;
+begin
+  Result := if (A < B) then if (A < B) then (B) else if (C > D) then B else A else if True then if (A < B) then D else D else B + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kElse) (exprIf (kIf) (kTrue) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 750
+===
+procedure Test;
+begin
+  Result := if (A < B) then ((A)) else (if (A < B) then D else A) + (C + B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 751
+===
+procedure Test;
+begin
+  Result := (if (A < B) then C else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 752
+===
+procedure Test;
+begin
+  Result := (if (A < B) then C else D) + (B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 753
+===
+procedure Test;
+begin
+  Result := B + C + (D + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 754
+===
+procedure Test;
+begin
+  Result := (if True then C else B) + (D + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 755
+===
+procedure Test;
+begin
+  Result := if (A < B) then if True then A else D else D + B;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 756
+===
+procedure Test;
+begin
+  Result := if False then (B + B) else (D + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprParens (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 757
+===
+procedure Test;
+begin
+  Result := if False then A else D;
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))) (kEnd))))
+
+===
+Fuzzed Ternary 758
+===
+procedure Test;
+begin
+  Result := C + C + (D + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 759
+===
+procedure Test;
+begin
+  Result := (D + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprBinary (identifier) (kAdd) (identifier)))) (kEnd))))
+
+===
+Fuzzed Ternary 760
+===
+procedure Test;
+begin
+  Result := (if True then D else C) + (if False then C else D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (exprIf (kIf) (kFalse) (kThen) (identifier) (kElse) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 761
+===
+procedure Test;
+begin
+  Result := (if True then ((C)) else A + B + (if (A < B) then D else C));
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kTrue) (kThen) (exprParens (exprParens (identifier))) (kElse) (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))))))) (kEnd))))
+
+===
+Fuzzed Ternary 762
+===
+procedure Test;
+begin
+  Result := if (C > D) then if False then (D) else A + D else (C) + (if True then C else B);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprIf (kIf) (kFalse) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprBinary (exprParens (identifier)) (kAdd) (exprParens (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 763
+===
+procedure Test;
+begin
+  Result := (if (C > D) then (C) else D + C);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 764
+===
+procedure Test;
+begin
+  Result := (if False then if True then (C) else C + C else if (A < B) then if True then A else B else C + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprParens (exprIf (kIf) (kFalse) (kThen) (exprIf (kIf) (kTrue) (kThen) (exprParens (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier))) (kElse) (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (kTrue) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+
+===
+Fuzzed Ternary 765
+===
+procedure Test;
+begin
+  Result := if False then (if (A < B) then B else B) + (B) else (B + A);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprIf (kIf) (kFalse) (kThen) (exprBinary (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (identifier) (kElse) (identifier))) (kAdd) (exprParens (identifier))) (kElse) (exprParens (exprBinary (identifier) (kAdd) (identifier))))) (kEnd))))
+
+===
+Fuzzed Ternary 766
+===
+procedure Test;
+begin
+  Result := A + A + (C) + (if (A < B) then if (C > D) then B else A else B + D);
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (assignment (identifier) (kAssign) (exprBinary (exprBinary (exprBinary (identifier) (kAdd) (identifier)) (kAdd) (exprParens (identifier))) (kAdd) (exprParens (exprIf (kIf) (exprParens (exprBinary (identifier) (kLt) (identifier))) (kThen) (exprIf (kIf) (exprParens (exprBinary (identifier) (kGt) (identifier))) (kThen) (identifier) (kElse) (identifier)) (kElse) (exprBinary (identifier) (kAdd) (identifier)))))) (kEnd))))
+

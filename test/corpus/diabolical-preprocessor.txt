@@ -1300,3 +1300,505 @@ end;
 ---
 (root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
 
+===
+Fuzzed Preprocessor 81
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 82
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$else}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 83
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 84
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$else}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 85
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$else}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 86
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 87
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 88
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$else}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 89
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$else}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 90
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 91
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 92
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$else}
+    {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 93
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$else}
+    {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 94
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$ifdef FOO}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 95
+===
+procedure Test;
+begin
+  {$if 1=1}
+    A := 1;
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 96
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    A := 1;
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 97
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 98
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 99
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    A := 1;
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 100
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 101
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 102
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$else}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 103
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$ifdef FOO}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$else}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 104
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 105
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 106
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 107
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 108
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$ifdef FOO}
+    {$if 1=1}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$else}
+    {$if 1=1}
+    A := 1;
+  {$else}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 109
+===
+procedure Test;
+begin
+  {$if 1=1}
+    {$ifdef FOO}
+    A := 1;
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (kEnd))))
+
+===
+Fuzzed Preprocessor 110
+===
+procedure Test;
+begin
+  {$ifdef FOO}
+    {$if 1=1}
+    {$if 1=1}
+    A := 1;
+  {$endif}
+  {$endif}
+  {$endif}
+end;
+---
+(root (defProc (declProc (kProcedure) (identifier)) (block (kBegin) (pp) (pp) (pp) (assignment (identifier) (kAssign) (literalNumber)) (pp) (pp) (pp) (kEnd))))
+
