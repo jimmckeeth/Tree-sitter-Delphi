@@ -50,7 +50,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$TsPascalDir   = $PSScriptRoot
+$TsPascalDir   = Split-Path $PSScriptRoot -Parent
 $RepoRoot      = Split-Path $TsPascalDir -Parent
 $OutRoot       = Join-Path $TsPascalDir 'Libs'
 $TsCoreDir     = Join-Path $TsPascalDir 'tree-sitter'
@@ -245,6 +245,14 @@ foreach ($plat in $Platforms) {
     if ($plat -eq 'WASM') {
         # ── tree-sitter-pascal (WASM) ─────────────────────────────────────────
         Write-Host "  pascal (wasm) -> tree-sitter-pascal.wasm"
+
+        # Automatically activate emsdk if it exists in the root
+        $envScript = Join-Path $TsPascalDir "emsdk\emsdk_env.ps1"
+        if (Test-Path $envScript) {
+            Write-Host "  Activating emsdk environment..." -ForegroundColor Gray
+            . $envScript
+        }
+
         # tree-sitter-cli on Windows might try to use Podman/Docker if emcc is not found.
         # We try to detect emcc first.
         $emccPath = Get-Command emcc -ErrorAction SilentlyContinue

@@ -8,9 +8,9 @@ from wheel.bdist_wheel import bdist_wheel
 
 class Build(build):
     def run(self):
-        if isdir("queries"):
+        if isdir("../../queries"):
             dest = join(self.build_lib, "tree_sitter_pascal", "queries")
-            self.copy_tree("queries", dest)
+            self.copy_tree("../../queries", dest)
         super().run()
 
 
@@ -23,8 +23,8 @@ class BdistWheel(bdist_wheel):
 
 
 setup(
-    packages=find_packages("bindings/python"),
-    package_dir={"": "bindings/python"},
+    packages=find_packages("."),
+    package_dir={"": "."},
     package_data={
         "tree_sitter_pascal": ["*.pyi", "py.typed"],
         "tree_sitter_pascal.queries": ["*.scm"],
@@ -34,8 +34,8 @@ setup(
         Extension(
             name="_binding",
             sources=[
-                "bindings/python/tree_sitter_pascal/binding.c",
-                "src/parser.c",
+                "tree_sitter_pascal/binding.c",
+                "../../src/parser.c",
                 # NOTE: if your language uses an external scanner, add it here.
             ],
             extra_compile_args=(
@@ -45,7 +45,7 @@ setup(
                 ("Py_LIMITED_API", "0x03080000"),
                 ("PY_SSIZE_T_CLEAN", None)
             ],
-            include_dirs=["src"],
+            include_dirs=["../../src"],
             py_limited_api=True,
         )
     ],

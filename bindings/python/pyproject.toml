@@ -16,7 +16,7 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 license.text = "MIT"
-readme = "README.md"
+readme = "../../README.md"
 dependencies = [
     "langchain>=0.0.27",
 ]

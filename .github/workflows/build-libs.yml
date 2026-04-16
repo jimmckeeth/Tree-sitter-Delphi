@@ -29,7 +29,7 @@ jobs:
       - name: Build core, Pascal, and extra grammars (Win32 & Win64)
         shell: pwsh
         run: |
-          .\build.ps1 -Platforms Win32,Win64 -Grammars
+          .\scripts\build.ps1 -Platforms Win32,Win64 -Grammars
 
       - name: Rename DLLs with platform suffix for release assets
         shell: pwsh
@@ -76,7 +76,7 @@ jobs:
       - name: Build core, Pascal, and extra grammars (Linux64)
         shell: pwsh
         run: |
-          ./build.ps1 -Platforms Linux64 -Grammars
+          .\scripts\build.ps1 -Platforms Linux64 -Grammars
 
       - name: Rename .so files with platform suffix
         shell: pwsh
@@ -114,7 +114,7 @@ jobs:
       - name: Build core, Pascal, and extra grammars (macOS-x64 & macOS-arm64)
         shell: pwsh
         run: |
-          ./build.ps1 -Platforms macOS-x64,macOS-arm64 -Grammars
+          .\scripts\build.ps1 -Platforms macOS-x64,macOS-arm64 -Grammars
 
       - name: Rename dylibs with platform suffix
         shell: pwsh
@@ -159,12 +159,12 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: cd bindings/node && npm install
 
       - name: Build WASM grammars
         shell: pwsh
         run: |
-          ./build.ps1 -Platforms WASM -Grammars
+          .\scripts\build.ps1 -Platforms WASM -Grammars
 
       - name: Upload WASM artifacts
         uses: actions/upload-artifact@v4

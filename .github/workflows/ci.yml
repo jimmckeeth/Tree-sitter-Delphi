@@ -23,13 +23,13 @@ jobs:
         node-version: '20'
 
     - name: Install dependencies
-      run: npm install
+      run: cd bindings/node && npm install
 
     - name: Build parser
-      run: npm run build
+      run: cd bindings/node && npm run build
 
     - name: Run tests
-      run: npm test
+      run: cd bindings/node && npm test
 
     - name: Update documentation
       run: node docs/export_rules.js

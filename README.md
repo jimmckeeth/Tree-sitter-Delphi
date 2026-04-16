@@ -32,6 +32,17 @@ A [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar supporting P
 - Syntax highlighting
 - Scopes
 
+## Repository Organization
+
+To keep the root directory clean, the repository is organized as follows:
+
+- **`bindings/`**: Contains language-specific bindings and their package manager files (e.g., `package.json`, `setup.py`, `Cargo.toml`).
+- **`scripts/`**: Contains utility scripts for building (`build.ps1`), cleaning (`clean.ps1`), and checking prerequisites (`ensure-prereq.ps1`).
+- **`src/`**: The generated C parser and header files.
+- **`queries/`**: Tree-sitter query files for syntax highlighting and local variables.
+- **`test/`**: The test corpus and fuzzing scripts.
+- **`examples/`**: Example Pascal files for testing and demonstration.
+
 ## Written in JavaScript and not Delphi?
 
 I get this question a lot. You could certainly rewrite the whole Tree-Sitter stack in Delphi, but I don't think that makes sense. First of all I'm a pragmatist and just want to use what works. It could be an interesting exercise to rewrite it (or even have an AI do it) but what does that gain us? The main goal for this is compatibility in the wider ecosystem, so there is an advantage of having it written in the same language as the other grammars. If we re-wrote it in Delphi then we could end up with a two different forks, which just divides the effort.
@@ -65,15 +76,18 @@ To ensure the grammar's robustness beyond simple "happy path" scenarios, we use 
 To run the full test suite, which includes grammar validation and parsing example files, use:
 
 ```powershell
+cd bindings/node
+npm install
 npm test
 ```
 
 ### Individual Test Commands
 
+From the root of the repository:
 - **Run corpus tests:** `npx tree-sitter test`
 - **Parse example files:** `npx tree-sitter parse examples/*`
 - **Test syntax highlighting:** `npx tree-sitter highlight <path_to_file>`
 
 ## License
 
-I've migrated my updates to [AGPL](license). I'm a big fan of open source. Unfortunately, I've seen too many people take advantage of permissive licenses to turn an open source project into a closed source one, which is why I prefer AGPL. At the same time I'm also a big fan of commercial software, which might seem incompatible, which is why I'm happy to provide a dual license. I'll set up a pricing structure later, but I just want to announce it is an option.
+I've migrated my updates to [AGPL](license). I'm a big fan of open source. Unfortunately, I've seen too many companies take advantage of permissive licenses and turn an open source project into a closed source one. This is why I prefer AGPL. At the same time, I'm also a big fan of commercial software, which might seem incompatible. That is why I'm happy to provide a dual license. I'll set up a pricing structure later, but I just want to announce it is an option. Let me know if you are interested.
