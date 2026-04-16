@@ -1,6 +1,6 @@
 # Tree-Sitter-Pascal (Delphi)
 
-[<img src="docs/Tree-sitter-Delphi-512.avif" style="zoom:50%; float:right;" alt="tree sitter Delphi logo - a hoplite/spartan warrior sitting in a tree next to a treehouse"/>](https://github.com/jimmckeeth/Tree-sitter-Delphi)
+[<img src="docs/Tree-sitter-Delphi-512.avif" style="zoom:50%; float:right;" alt="tree sitter Delphi logo - a hoplite/spartan warrior sitting in a tree next to a treehouse"/>](https://github.com/jimmckeeth/Tree-sitter-Delphi)    
 A [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar supporting Pascal with focus on Delphi's Object Pascal. This is ultimately based on [Isopod's original implementation](https://github.com/Isopod/tree-sitter-pascal), but updated and focused on the latest language features. Support of other pascal dialects like Free Pascal are a secondary priority, but pull requests are welcome and we hope to support it as well. See also [Delphi-tree-sitter bindings](https://github.com/jimmckeeth/delphi-tree-sitter) for consuming tree-sitter grammars from Delphi.
 
 ## What is Tree-sitter?
@@ -73,3 +73,7 @@ npm test
 - **Run corpus tests:** `npx tree-sitter test`
 - **Parse example files:** `npx tree-sitter parse examples/*`
 - **Test syntax highlighting:** `npx tree-sitter highlight <path_to_file>`
+
+## License
+
+I've migrated my updates to [AGPL](license). I'm a big fan of open source. Unfortunately, I've seen too many people take advantage of permissive licenses to turn an open source project into a closed source one, which is why I prefer AGPL. At the same time I'm also a big fan of commercial software, which might seem incompatible, which is why I'm happy to provide a dual license. I'll set up a pricing structure later, but I just want to announce it is an option.

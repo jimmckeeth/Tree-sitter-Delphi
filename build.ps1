@@ -153,6 +153,8 @@ function Build-Grammar([string]$Lang, [string]$SrcSubDir, [string]$OutDir, [hash
 
     if ($PlatInfo.Target -eq 'wasm32-unknown-emscripten') {
         Push-Location $repoDir
+        # Try building with npx tree-sitter build --wasm.
+        # If emcc is not in path, tree-sitter-cli might try docker/podman which often fails.
         & npx tree-sitter build --wasm 2>&1
         $wasmFile = "tree-sitter-$Lang.wasm"
         if (Test-Path $wasmFile) {
@@ -243,13 +245,28 @@ foreach ($plat in $Platforms) {
     if ($plat -eq 'WASM') {
         # ── tree-sitter-pascal (WASM) ─────────────────────────────────────────
         Write-Host "  pascal (wasm) -> tree-sitter-pascal.wasm"
-        & npx tree-sitter build --wasm 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            Write-Host "  FAILED: pascal (wasm)" -ForegroundColor Red
-            $failed.Add("$plat/pascal"); continue
+        # tree-sitter-cli on Windows might try to use Podman/Docker if emcc is not found.
+        # We try to detect emcc first.
+        $emccPath = Get-Command emcc -ErrorAction SilentlyContinue
+        if ($null -eq $emccPath) {
+            Write-Warning "  emcc not found in PATH. tree-sitter-cli might try to use Podman/Docker which could fail."
         }
-        if (Test-Path "tree-sitter-pascal.wasm") {
-            Move-Item "tree-sitter-pascal.wasm" (Join-Path $outDir "tree-sitter-pascal.wasm") -Force
+
+        & npx tree-sitter build --wasm 2>&1
+        $wasmFile = "tree-sitter-pascal.wasm"
+        if (-not (Test-Path $wasmFile)) {
+            # Sometimes it might be named tree-sitter-pascal.wasm depending on tree-sitter.json or version
+            # Let's check for any .wasm file in current dir if the specific one is missing.
+            $foundWasm = Get-ChildItem "*.wasm" | Select-Object -First 1
+            if ($null -ne $foundWasm) { $wasmFile = $foundWasm.Name }
+        }
+
+        if (Test-Path $wasmFile) {
+            Move-Item $wasmFile (Join-Path $outDir "tree-sitter-pascal.wasm") -Force
+            Write-Host "  OK" -ForegroundColor Green
+        } else {
+            Write-Host "  FAILED: pascal (wasm) - No WASM file generated." -ForegroundColor Red
+            $failed.Add("$plat/pascal"); continue
         }
     } else {
         # ── tree-sitter core ──────────────────────────────────────────────────
@@ -273,6 +290,7 @@ foreach ($plat in $Platforms) {
             Write-Host "  FAILED: pascal" -ForegroundColor Red
             $failed.Add("$plat/pascal"); continue
         }
+        Write-Host "  OK" -ForegroundColor Green
     }
 
     # ── extra grammars ────────────────────────────────────────────────────────
@@ -292,8 +310,6 @@ foreach ($plat in $Platforms) {
             }
         }
     }
-
-    Write-Host "  OK" -ForegroundColor Green
 
     # ── deploy to Delphi output directories ───────────────────────────────────
     Deploy-Libs $plat $outDir

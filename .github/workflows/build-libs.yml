@@ -43,6 +43,7 @@ jobs:
             $dir = "Libs/$plat"
             foreach ($dll in (Get-ChildItem "$dir/*.dll" -ErrorAction SilentlyContinue)) {
               $base = $dll.BaseName
+              if ($base -like "*-windows-*") { continue } # Skip already renamed
               $dest = "$dir/${base}-${suffix}.dll"
               Copy-Item $dll.FullName $dest
               Write-Host "  $($dll.Name) -> $(Split-Path $dest -Leaf)"
@@ -82,6 +83,7 @@ jobs:
         run: |
           Get-ChildItem 'Libs/Linux64/libtree-sitter*.so' | ForEach-Object {
             $base = $_.BaseName            # libtree-sitter-pascal
+            if ($base -like "*-linux-x64") { return }
             $name = $base -replace '^lib', '' # tree-sitter-pascal
             $dest = "Libs/Linux64/${name}-linux-x64.so"
             Copy-Item $_.FullName $dest
@@ -121,6 +123,7 @@ jobs:
             $suffix = $plat -replace 'macOS-', 'macos-'
             Get-ChildItem "Libs/$plat/libtree-sitter*.dylib" | ForEach-Object {
               $base = $_.BaseName
+              if ($base -like "*-macos-*") { return }
               $name = $base -replace '^lib', ''
               $dest = "Libs/$plat/${name}-${suffix}.dylib"
               Copy-Item $_.FullName $dest
@@ -185,16 +188,15 @@ jobs:
           merge-multiple: true
 
       - name: List assets to be released (Debug)
-        run: find release-assets -type f
+        run: |
+          ls -R release-assets/
+          echo "Files to upload:"
+          find release-assets/ -maxdepth 1 -type f
 
       - name: Create / update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            release-assets/**/*.dll
-            release-assets/**/*.so
-            release-assets/**/*.dylib
-            release-assets/**/*.wasm
+          files: release-assets/*
           generate_release_notes: true
           fail_on_unmatched_files: true
         env:
